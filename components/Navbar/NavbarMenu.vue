@@ -5,7 +5,7 @@ import { IconInfoSquareRounded, IconCoins } from '@tabler/icons-vue';
 <template>
   <ul class="menu menu-horizontal px-1">
     <li>
-      <NuxtLink to="/entities">
+      <NuxtLink to="/coins">
         <IconCoins /> Pièces
       </NuxtLink>
     </li>

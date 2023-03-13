@@ -1,0 +1,7 @@
+query GetCoins {
+	coins(limit: -1, filter: {status: {_eq: "published"} }) {
+		id
+		identifier
+		authority
+	}
+}

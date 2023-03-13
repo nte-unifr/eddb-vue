@@ -1,3 +1,9 @@
+<script setup>
+defineProps({
+  coins: Array
+})
+</script>
+
 <template>
   <div class="overflow-x-auto w-full px-8">
     <table class="table w-full">
@@ -7,9 +13,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr v-for="coin in coins">
           <td><ListImages /></td>
-          <td><ListIdentification /></td>
+          <td><ListIdentification :identifier="coin.identifier" /></td>
           <td><ListDatation /></td>
           <td><ListInfos /></td>
           <th>

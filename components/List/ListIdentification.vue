@@ -1,6 +1,7 @@
 <script setup>
 defineProps({
-  identifier: String
+  identifier: String,
+  authority: String
 })
 </script>
 
@@ -8,7 +9,7 @@ defineProps({
   <div class="flex items-center space-x-3">
     <div>
       <div class="font-bold">{{ identifier }}</div>
-      <div class="text-sm opacity-50">Maximien Hercule</div>
+      <div class="text-sm opacity-50">{{ authority }}</div>
     </div>
   </div>
 </template>

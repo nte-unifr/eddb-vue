@@ -14,12 +14,15 @@ defineProps({
       </thead>
       <tbody>
         <tr v-for="coin in coins">
-          <td><ListImages /></td>
-          <td><ListIdentification :identifier="coin.identifier" /></td>
-          <td><ListDatation /></td>
-          <td><ListInfos /></td>
+          <td>{{ coin.id }}</td>
+          <td class="w-52"><ListImages :image-obverse="coin.image_obverse?.id" :image-reverse="coin.image_reverse?.id" /></td>
+          <td><ListIdentification :identifier="coin.identifier" :authority="coin.authority" /></td>
+          <td><ListDatation :date-from="coin.date_from" :date-to="coin.date_to" /></td>
+          <td><ListInfos :coin="coin" /></td>
           <th>
-            <button class="btn btn-ghost btn-xs">details</button>
+            <NuxtLink :to="`/coins/${coin.id}`" class="btn btn-ghost btn-xs">
+              details
+            </NuxtLink>
           </th>
         </tr>
       </tbody>

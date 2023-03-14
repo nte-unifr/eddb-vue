@@ -1,7 +1,36 @@
 query GetCoins {
-	coins(limit: -1, filter: {status: {_eq: "published"} }) {
+	coins(limit: 100, filter: {status: {_eq: "pending"} }) {
 		id
 		identifier
 		authority
+		date_from
+		date_to
+		image_obverse {
+			id
+		}
+		image_reverse {
+			id
+		}
+		mint
+		material
+		denomination
+	}
+}
+
+query GetCoin($id: ID!) {
+	coin: coins_by_id(id: $id) {
+		id
+		identifier
+		authority
+		date_from
+		date_to
+		image_obverse {
+			id
+		}
+		obverse
+		image_reverse {
+			id
+		}
+		reverse
 	}
 }

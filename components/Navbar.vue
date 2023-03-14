@@ -9,7 +9,7 @@
       <NavbarMenu class="hidden lg:inline-flex" />
     </div>
     <div class="navbar-end">
-      <NavbarTheme />
+      <!-- <NavbarTheme /> -->
     </div>
   </div>
 </template>

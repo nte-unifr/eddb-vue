@@ -6,9 +6,10 @@ const { data, pending, error } = await useAsyncGql('GetCoins')
   <div class="min-h-screen bg-base-300">
     <div class="drawer drawer-mobile">
       <input id="main-drawer" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content flex flex-col items-center justify-center pt-28">
+      <div class="drawer-content flex flex-col pt-24 pb-14">
         <!-- Page content here -->
         <label for="main-drawer" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+        <p class="text-base font-semibold px-8 mb-2">{{ data?.coins.length }} / {{ data?.coins.length }}</p>
         <List v-if="data?.coins" :coins="data.coins" />
       </div>
       <div class="drawer-side">

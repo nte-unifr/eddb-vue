@@ -4,7 +4,7 @@
       <div class="max-w-md">
         <h1 class="text-5xl font-bold">NAFO Database</h1>
         <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-        <NuxtLink to="/entities" class="btn btn-primary">
+        <NuxtLink to="/coins" class="btn btn-primary">
           Parcourir la base de données
         </NuxtLink>
       </div>

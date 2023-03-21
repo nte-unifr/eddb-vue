@@ -32,5 +32,13 @@ query GetCoin($id: ID!) {
 			id
 		}
 		reverse
+		mint
+		material
+		denomination
+		weight
+		diameter
+		axis
+		comment
+		bibliography
 	}
 }

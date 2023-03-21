@@ -5,7 +5,7 @@ const { data, pending, error } = await useAsyncGql('GetCoin', { id: id })
 </script>
 
 <template>
-  <div class="min-h-screen bg-base-300 pt-24">
+  <div class="min-h-screen bg-base-300 py-24">
     <div class="container mx-auto max-w-5xl">
       <div class="text-lg breadcrumbs">
         <ul>
@@ -22,37 +22,29 @@ const { data, pending, error } = await useAsyncGql('GetCoin', { id: id })
       </div>
       <div v-else-if="error">{{ error }}</div>
       <div v-else-if="data?.coin">
-        <DetailsTitle :title="data.coin.identifier" />
-        <div class="flex">
-          <div class="w-1/2 p-2">
-            <DetailsImage :image="data.coin.image_obverse?.id" :description="data.coin.obverse" />
-          </div>
-          <div class="w-1/2 p-2">
-            <DetailsImage :image="data.coin.image_reverse?.id" :description="data.coin.reverse" />
+        <div class="bg-base-100 shadow-xl rounded-xl">
+          <h2 class="text-4xl font-normal leading-normal pt-10 pl-10">
+            {{ data.coin.identifier || 'No title' }}
+          </h2>
+          <div class="px-20 pb-10">
+            <DetailsImageDescription title="Avers" :image="data.coin.image_obverse?.id" :description="data.coin.obverse" />
+            <DetailsImageDescription title="Revers" :image="data.coin.image_reverse?.id" :description="data.coin.reverse" />
+
+            <table class="table w-full">
+              <div class="table-row-group">
+                <DetailsRow title="Atelier" :info="data.coin.mint" />
+                <DetailsRow title="Métal" :info="data.coin.material" />
+                <DetailsRow title="Dénomination" :info="data.coin.denomination" />
+                <DetailsRow title="Poids" :info="data.coin.weight" />
+                <DetailsRow title="Diamètre" :info="data.coin.diameter" />
+                <DetailsRow title="Axe" :info="data.coin.axis" />
+                <DetailsRow title="Commentaire" :info="data.coin.comment" />
+                <DetailsRow title="Référence bibliographique" :info="data.coin.bibliography" :raw="true" />
+              </div>
+            </table>
           </div>
         </div>
-
-        <table class="table w-full mt-4">
-          <tbody>
-            <!-- row 1 -->
-            <tr>
-              <td class="text-right w-1/2 font-semibold">Cy Ganderton</td>
-              <td class="text-left w-1/2">Quality Control Specialist</td>
-            </tr>
-            <!-- row 2 -->
-            <tr>
-              <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
-            </tr>
-            <!-- row 3 -->
-            <tr>
-              <td>Brice Swyre</td>
-              <td>Tax Accountant</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
-      <pre>{{ data }}</pre>
     </div>
   </div>
 </template>

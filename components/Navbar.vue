@@ -10,6 +10,7 @@
     </div>
     <div class="navbar-end">
       <!-- <NavbarTheme /> -->
+      <label for="main-drawer" class="btn drawer-button lg:hidden">Filtres</label>
     </div>
   </div>
 </template>

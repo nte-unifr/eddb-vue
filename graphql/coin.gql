@@ -22,6 +22,7 @@ query GetCoin($id: ID!) {
 		id
 		identifier
 		authority
+		portrait
 		date_from
 		date_to
 		image_obverse {

@@ -61,17 +61,21 @@ const props = defineProps({
             <div class="table-cell font-bold pr-6 w-1/3 text-right">Dénomination</div>
             <div class="table-cell pb-2">{{ coin.denomination }}</div>
           </div>
-          <div v-if="coin.weight" class="table-row">
+          <div class="table-row">
             <div class="table-cell font-bold pr-6 w-1/3 text-right">Poids</div>
-            <div class="table-cell pb-2">{{ coin.weight }}</div>
+            <div class="table-cell pb-2">
+              <span v-if="coin.weight">{{ coin.weight }} g</span><span v-else><UndefinedData /></span>
+            </div>
           </div>
-          <div v-if="coin.diameter" class="table-row">
+          <div class="table-row">
             <div class="table-cell font-bold pr-6 w-1/3 text-right">Diamètre</div>
-            <div class="table-cell pb-2">{{ coin.diameter }}</div>
+            <div class="table-cell pb-2">
+              <span v-if="coin.diameter">{{ coin.diameter }} mm</span><span v-else><UndefinedData /></span>
+            </div>
           </div>
-          <div v-if="coin.axis" class="table-row">
+          <div class="table-row">
             <div class="table-cell font-bold pr-6 w-1/3 text-right">Axe</div>
-            <div class="table-cell pb-2">{{ coin.axis }}</div>
+            <span v-if="coin.axis">{{ coin.axis }}°</span><span v-else><UndefinedData /></span>
           </div>
           <div v-if="coin.comment" class="table-row">
             <div class="table-cell font-bold pr-6 w-1/3 text-right">Commentaire</div>
@@ -79,7 +83,7 @@ const props = defineProps({
           </div>
           <div v-if="coin.bibliography" class="table-row">
             <div class="table-cell font-bold pr-6 w-1/3 text-right">Bibliographie</div>
-            <div class="table-cell pb-2" v-html="coin.bibliography"></div>
+            <div class="table-cell pb-2 has-links" v-html="coin.bibliography"></div>
           </div>
         </div>
       </div>

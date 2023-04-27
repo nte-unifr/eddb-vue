@@ -90,3 +90,10 @@ const props = defineProps({
     </div>
   </div>
 </template>
+
+<style scoped>
+.has-links ::v-deep a {
+  color: rgb(87, 13, 248);
+  text-decoration: underline;
+}
+</style>

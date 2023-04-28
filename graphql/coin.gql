@@ -1,5 +1,5 @@
-query GetCoins {
-	coins(limit: 100, filter: {status: {_eq: "pending"} }) {
+query GetCoins($page: Int!) {
+	coins(limit: 100, page: $page, filter: {status: {_eq: "pending"} }) {
 		id
 		identifier
 		authority

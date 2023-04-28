@@ -92,7 +92,7 @@ const props = defineProps({
 </template>
 
 <style scoped>
-.has-links ::v-deep a {
+.has-links :deep(a) {
   color: rgb(87, 13, 248);
   text-decoration: underline;
 }

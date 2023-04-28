@@ -1,20 +1,15 @@
 <script setup>
-const currentPage = ref(1)
+const pagination = usePaginationStore()
 const coins = ref([])
 
-watch(currentPage, () => {
+pagination.$subscribe(() => {
   fetchData()
 })
 
 const fetchData = async () => {
-  const { data, pending, error } = await useAsyncGql('GetCoins', { page: currentPage })
+  const { data, pending, error } = await useAsyncGql('GetCoins', { page: pagination.page })
   coins.value = data?.value?.coins || []
 }
-
-function setPage(pageNumber) {
-  currentPage.value = pageNumber
-}
-
 fetchData()
 </script>
 
@@ -46,10 +41,11 @@ fetchData()
         <label for="main-drawer" class="drawer-overlay"></label>
         <div class="menu p-4 w-80 bg-base-200 text-base-content py-28 prose">
           <Filters />
-          <button @click="setPage(1)">Page 1</button>
-          <button @click="setPage(2)">Page 2</button>
-          <input v-model="page" type="text" placeholder="1" />
-          Current page : {{ page }}
+          <div class="btn-group">
+            <button @click="pagination.decrement()" class="btn btn-sm">«</button>
+            <button class="btn btn-sm">Page {{ pagination.page }}</button>
+            <button @click="pagination.increment()" class="btn btn-sm">»</button>
+          </div>
         </div>
       </div>
     </div>

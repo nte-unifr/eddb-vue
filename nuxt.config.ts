@@ -2,8 +2,15 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
-    'nuxt-graphql-client'
+    'nuxt-graphql-client',
+    '@pinia/nuxt'
   ],
+  imports: {
+    dirs: ['./stores']
+  },
+  pinia: {
+    autoImports: ['defineStore', 'acceptHMRUpdate'],
+  },
   runtimeConfig: {
     public: {
       GQL_HOST: 'https://eddb9.unifr.ch/nafo/graphql' // overwritten by process.env.GQL_HOST

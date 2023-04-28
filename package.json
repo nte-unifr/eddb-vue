@@ -13,7 +13,9 @@
     "nuxt": "^3.4.2"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.4.9",
     "daisyui": "^2.51.3",
-    "nuxt-graphql-client": "^0.2.25"
+    "nuxt-graphql-client": "^0.2.25",
+    "pinia": "^2.0.35"
   }
 }

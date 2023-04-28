@@ -1,4 +1,9 @@
 query GetCoins($page: Int!) {
+	coins_aggregated(filter: {status: {_eq: "pending"} }) {
+    count {
+      id
+		}
+	},
 	coins(limit: 100, page: $page, filter: {status: {_eq: "pending"} }) {
 		id
 		identifier

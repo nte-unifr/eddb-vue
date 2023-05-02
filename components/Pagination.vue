@@ -25,17 +25,15 @@ async function handleGoToPage(p) {
 </script>
 
 <template>
-  <div class="flex flex-row-reverse">
-    <div class="btn-group my-4">
-      <button @click="handlePrevPage()" class="btn btn-sm btn-ghost" :class="{ 'btn-disabled': store.page == 1 }">
-        <IconPrev />
-      </button>
-      <template v-for="p in store.maxPage">
-        <button @click="handleGoToPage(p)" class="btn btn-sm btn-ghost" :class="{ 'btn-active': p == store.page }">{{ p }}</button>
-      </template>
-      <button @click="handleNextPage()" class="btn btn-sm btn-ghost" :class="{ 'btn-disabled': store.page == store.maxPage }">
-        <IconNext />
-      </button>
-    </div>
+  <div class="btn-group">
+    <button @click="handlePrevPage()" class="btn btn-sm btn-ghost" :class="{ 'btn-disabled': store.page == 1 }">
+      <IconPrev />
+    </button>
+    <template v-for="p in store.maxPage">
+      <button @click="handleGoToPage(p)" class="btn btn-sm btn-ghost" :class="{ 'btn-active': p == store.page }">{{ p }}</button>
+    </template>
+    <button @click="handleNextPage()" class="btn btn-sm btn-ghost" :class="{ 'btn-disabled': store.page == store.maxPage }">
+      <IconNext />
+    </button>
   </div>
 </template>

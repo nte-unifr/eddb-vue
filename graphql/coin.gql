@@ -1,10 +1,10 @@
-query GetCoins($limit: Int!, $page: Int!) {
+query GetCoins($limit: Int!, $page: Int!, $sort: [String!]!) {
 	coins_aggregated(filter: {status: {_eq: "pending"} }) {
     count {
       id
 		}
 	},
-	coins(limit: $limit, page: $page, filter: {status: {_eq: "pending"} }) {
+	coins(limit: $limit, page: $page, filter: {status: {_eq: "pending"} }, sort: $sort) {
 		id
 		identifier
 		authority

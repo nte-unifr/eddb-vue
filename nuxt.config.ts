@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     'nuxt-graphql-client',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@vueuse/nuxt'
   ],
   imports: {
     dirs: ['./stores']

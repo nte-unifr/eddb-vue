@@ -6,8 +6,8 @@ const props = defineProps({
 
 <template>
   <tr>
-    <td class="w-52">
-      <div class="flex">
+    <td>
+      <div class="flex w-40">
         <DirectusImage :imageId="coin.image_obverse?.id" preset="list-thumbnail" class="mask mask-squircle w-20 h-20" alt="Image obverse thumbnail" />
         <DirectusImage :imageId="coin.image_reverse?.id" preset="list-thumbnail" class="mask mask-squircle w-20 h-20" alt="Image reverse thumbnail" />
       </div>

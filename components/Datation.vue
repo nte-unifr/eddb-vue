@@ -12,7 +12,7 @@ const formattedDate = computed(() => {
 <template>
   <div v-if="from && to" class="flex">
     {{ formattedDate[0] }}
-    <IconArrowRightBar v-if="formattedDate[0]" class="mx-2" />
+    -
     {{ formattedDate[1] }}
   </div>
   <div v-else>Datation inconnue</div>

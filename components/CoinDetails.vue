@@ -75,7 +75,17 @@ const props = defineProps({
           </div>
           <div class="table-row">
             <div class="table-cell font-bold pr-6 w-1/3 text-right">Axe</div>
-            <span v-if="coin.axis">{{ coin.axis }}°</span><span v-else><UndefinedData /></span>
+            <div class="table-cell pb-2">
+              <span v-if="coin.axis">{{ coin.axis }}°</span><span v-else><UndefinedData /></span>
+            </div>
+          </div>
+          <div class="table-row">
+            <div class="table-cell">
+              <div class="divider"></div>
+            </div>
+            <div class="table-cell">
+              <div class="divider"></div>
+            </div>
           </div>
           <div v-if="coin.comment" class="table-row">
             <div class="table-cell font-bold pr-6 w-1/3 text-right">Commentaire</div>
@@ -87,6 +97,9 @@ const props = defineProps({
           </div>
         </div>
       </div>
+    </div>
+    <div class="p-8">
+      <AlertCopy />
     </div>
   </div>
 </template>

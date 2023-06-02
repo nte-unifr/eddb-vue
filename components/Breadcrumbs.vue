@@ -10,7 +10,7 @@ defineProps({
       <li>
         <NuxtLink to="/coins">Pièces</NuxtLink>
       </li>
-      <li>#{{ id }}</li>
+      <li>ID#{{ id }}</li>
     </ul>
   </div>
 </template>

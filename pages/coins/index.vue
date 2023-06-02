@@ -1,7 +1,8 @@
 <script setup>
-definePageMeta({ layout: "table" })
 const store = useCoinsStore()
+const filters =  useFiltersStore()
 store.fetchCoins()
+filters.fetch()
 </script>
 
 <template>
@@ -10,6 +11,13 @@ store.fetchCoins()
       <Sorting />
       <div class="grow"></div>
       <Pagination />
+    </div>
+    <div class="flex items-center my-4">
+      <Filterbis title="Autorité émettrice" slug="authority" />
+      <Filterbis title="Portrait" slug="portrait" />
+      <Filterbis title="Atelier" slug="mint" />
+      <Filterbis title="Métal" slug="material" />
+      <p class="ml-2"><strong>{{ store.totalFiltered }}</strong>&nbsp;résultats sur&nbsp;<strong>{{ store.total }}</strong></p>
     </div>
     <label for="main-drawer" class="btn btn-link drawer-button lg:hidden">Afficher les filtres</label>
     <table class="table w-full">
@@ -27,5 +35,5 @@ store.fetchCoins()
       <div class="grow"></div>
       <Pagination v-if="store.total > 10" />
     </div>
-    </div>
-  </template>
+  </div>
+</template>

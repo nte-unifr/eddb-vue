@@ -1,0 +1,8 @@
+query GetFilters {
+	filters: coins(limit: -1, filter: {status: {_eq: "pending"} }) {
+		authority
+		portrait
+    mint
+		material
+	}
+}

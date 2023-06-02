@@ -22,6 +22,7 @@ const props = defineProps({
       <Datation :from="coin.date_from" :to="coin.date_to" />
     </td>
     <td>
+      <InfoBadge v-if="coin.portrait" title="Portrait" :value="coin.portrait" />
       <InfoBadge v-if="coin.mint" title="Atelier" :value="coin.mint" />
       <InfoBadge v-if="coin.material" title="Métal" :value="coin.material" />
       <InfoBadge v-if="coin.denomination" title="Dénomination" :value="coin.denomination" />

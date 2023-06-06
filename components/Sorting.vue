@@ -1,14 +1,11 @@
 <script setup>
-const store = useCoinsStore()
+const store = useSorterStore()
 </script>
 
 <template>
-  <a @click="store.setSort(store.SORT_IDENTIFIER_KEY)" class="btn btn-sm btn-ghost mr-4" :class="{ 'btn-link': store.sortKey == store.SORT_IDENTIFIER_KEY }">
-    <IconAscendingLetters class="inline" />
-    Identifiant
-  </a>
-  <a @click="store.setSort(store.SORT_DATE_KEY)" class="btn btn-sm btn-ghost" :class="{ 'btn-link': store.sortKey == store.SORT_DATE_KEY }">
-    <IconAscendingNumbers class="inline" />
-    Date
+  <a v-for="value, key in store.options" @click="store.setSort(key)" class="btn btn-sm btn-ghost mr-4" :class="{ 'btn-link': store.sort == key}">
+    <IconAscendingLetters class="inline" v-if="value.type == 'letters'" />
+    <IconAscendingNumbers class="inline" v-if="value.type == 'numbers'" />
+    {{ key }}
   </a>
 </template>

@@ -1,0 +1,12 @@
+[
+  {
+    "title": "identifiant",
+    "type": "letters",
+    "criteria": "['identifier']"
+  },
+  {
+    "title": "date",
+    "type": "numbers",
+    "criteria": "['date_from', 'identifier']"
+  }
+]

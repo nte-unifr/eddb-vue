@@ -6,7 +6,7 @@ filters.fetch()
 </script>
 
 <template>
-  <div class="min-h-screen bg-base-300 pt-24 px-8">
+  <div class="min-h-screen max-w-screen-2xl bg-base-300 pt-24 px-8">
     <div class="flex my-4">
       <Sorting />
       <div class="grow"></div>

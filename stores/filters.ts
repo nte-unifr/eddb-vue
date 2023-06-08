@@ -4,6 +4,10 @@ export const useFiltersStore = defineStore('filters', () => {
   const status = 'pending'
   const coinsStore = useCoinsStore()
 
+  interface FilterTypes {
+    [key: string]: string[];
+  }
+
   interface ListItem {
     authority: string[];
     portrait: string[];
@@ -22,6 +26,7 @@ export const useFiltersStore = defineStore('filters', () => {
   const inactiveList = computed(() => {
     const inactiveItems: ListItem = {
       authority: [],
+
       portrait: [],
       mint: [],
       material: []
@@ -33,108 +38,13 @@ export const useFiltersStore = defineStore('filters', () => {
       }
     }
 
-    return inactiveItems;
+    return inactiveItems
   })
 
-  const authorityCondition = computed(() => {
-    if (activeList['authority'].length > 0) {
-      return {
-        'authority': {
-          _in: activeList['authority']
-        }
-      }
-    } else {
-      return {
-        '_or': [
-          {
-            'authority': {
-              _in: list['authority']
-            }
-          },
-          {
-            'authority': {
-              _null: true
-            }
-          }
-        ]
-      }
-    }
-  })
-
-  const mintCondition = computed(() => {
-    if (activeList['mint'].length > 0) {
-      return {
-        'mint': {
-          _in: activeList['mint']
-        }
-      }
-    } else {
-      return {
-        '_or': [
-          {
-            'mint': {
-              _in: list['mint']
-            }
-          },
-          {
-            'mint': {
-              _null: true
-            }
-          }
-        ]
-      }
-    }
-  })
-
-  const materialCondition = computed(() => {
-    if (activeList['material'].length > 0) {
-      return {
-        'material': {
-          _in: activeList['material']
-        }
-      }
-    } else {
-      return {
-        '_or': [
-          {
-            'material': {
-              _in: list['material']
-            }
-          },
-          {
-            'material': {
-              _null: true
-            }
-          }
-        ]
-      }
-    }
-  })
-
-  const portraitCondition = computed(() => {
-    if (activeList['portrait'].length > 0) {
-      return {
-        'portrait': {
-          _in: activeList['portrait']
-        }
-      }
-    } else {
-      return {
-        '_or': [
-          {
-            'portrait': {
-              _in: list['portrait']
-            }
-          },
-          {
-            'portrait': {
-              _null: true
-            }
-          }
-        ]
-      }
-    }
-  })
+  const authorityCondition = createCondition('authority')
+  const mintCondition = createCondition('mint')
+  const materialCondition = createCondition('material')
+  const portraitCondition = createCondition('portrait')
 
   const filterQuery = computed(() => ({
     _and: [
@@ -185,6 +95,33 @@ export const useFiltersStore = defineStore('filters', () => {
     coinsStore.fetchCoins()
     coinsStore.goToPage(1)
   }
+
+  function createCondition<T extends keyof ListItem>(key: T) {
+    return computed(() => {
+      if (activeList[key].length > 0) {
+        return {
+          [key]: {
+            _in: activeList[key],
+          },
+        };
+      } else {
+        return {
+          "_or": [
+            {
+              [key]: {
+                _in: list[key],
+              },
+            },
+            {
+              [key]: {
+                _null: true,
+              },
+            },
+          ],
+        };
+      }
+    });
+  }  
 
   return {
     fetch, list, activeList, inactiveList, setActive, removeActive, reset, filterQuery, status

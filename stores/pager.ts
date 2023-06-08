@@ -1,9 +1,9 @@
 export const usePagerStore = defineStore('pager', () => {
 
-  const LIMIT = 50
+  const limit = 50
   const page = ref(1)
   const total = ref(1) // total entities of current set (with filters applied)
-  const max = computed(() => Math.ceil(total.value / LIMIT))
+  const max = computed(() => Math.ceil(total.value / limit))
 
   function prev() {
     if (page.value > 1) {
@@ -18,8 +18,10 @@ export const usePagerStore = defineStore('pager', () => {
   }
 
   function goTo(p: number) {
-    page.value = p
+    if (p > 0 && p <= max.value) {
+      page.value = p
+    }
   }
 
-  return { page, prev, next, goTo }
+  return { page, limit, total, max, prev, next, goTo }
 })

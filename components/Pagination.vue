@@ -1,5 +1,5 @@
 <script setup>
-//const store = useCoinsStore()
+const coinsStore = useCoinsStore()
 const store = usePagerStore()
 
 function scrollToTop() {
@@ -11,15 +11,18 @@ function scrollToTop() {
 </script>
 
 <template>
-  <div class="btn-group">
-    <button @click="store.prev()" class="btn btn-sm btn-ghost" :class="{ 'btn-disabled': store.page == 1 }">
-      <IconPrev />
-    </button>
-    <template v-for="p in store.max">
-      <button @click="store.goTo(p)" class="btn btn-sm btn-ghost" :class="{ 'btn-active': p == store.page }">{{ p }}</button>
-    </template>
-    <button @click="store.next()" class="btn btn-sm btn-ghost" :class="{ 'btn-disabled': store.page == store.max }">
-      <IconNext />
-    </button>
+  <div class="flex items-center">
+    <p class="mr-4"><strong>{{ store.total }}</strong>&nbsp;résultats sur&nbsp;<strong>{{ coinsStore.total }}</strong></p>
+    <div class="btn-group">
+      <button @click="store.prev()" class="btn btn-sm btn-ghost" :class="{ 'btn-disabled': store.page == 1 }">
+        <IconPrev />
+      </button>
+      <template v-for="p in store.max">
+        <button @click="store.goTo(p)" class="btn btn-sm btn-ghost" :class="{ 'btn-active': p == store.page }">{{ p }}</button>
+      </template>
+      <button @click="store.next()" class="btn btn-sm btn-ghost" :class="{ 'btn-disabled': store.page == store.max }">
+        <IconNext />
+      </button>
+    </div>
   </div>
 </template>

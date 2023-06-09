@@ -4,7 +4,7 @@ query GetCoins($limit: Int!, $page: Int!, $sort: [String!]!, $filter: coins_filt
       id
 		}
 	},
-	totalFiltered: coins(limit: -1, filter: $filter) {
+	total: coins(limit: -1, filter: $filter) {
 		id
 	}
 	coins(limit: $limit, page: $page, filter: $filter, sort: $sort) {

@@ -4,7 +4,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'nuxt-graphql-client',
     '@pinia/nuxt',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    '@nuxt/content'
   ],
   imports: {
     dirs: ['./stores']

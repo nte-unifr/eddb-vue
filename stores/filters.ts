@@ -1,129 +1,85 @@
-import { useCoinsStore } from './coins'
-
 export const useFiltersStore = defineStore('filters', () => {
   const status = 'pending'
-  const coinsStore = useCoinsStore()
+  const list: FilterTypes = reactive({})
+  const activeList: FilterTypes = reactive({})
 
-  interface FilterTypes {
-    [key: string]: string[];
-  }
-
-  interface ListItem {
-    authority: string[];
-    portrait: string[];
-    mint: string[];
-    material: string[];
-  }
-
-  const list: ListItem = reactive({
-    authority: [],
-    portrait: [],
-    mint: [],
-    material: []
-  })
-  const activeList: ListItem = reactive({ ...list })
-
+  // Compute the list of inactive filters by removing active ones from the main list
   const inactiveList = computed(() => {
-    const inactiveItems: ListItem = {
-      authority: [],
-
-      portrait: [],
-      mint: [],
-      material: []
-    }
-
-    for (const key in list) {
-      if (list.hasOwnProperty(key)) {
-        inactiveItems[key as keyof ListItem] = list[key as keyof ListItem].filter(item => !activeList[key as keyof ListItem].includes(item))
-      }
-    }
-
-    return inactiveItems
+    return Object.keys(list).reduce((acc: FilterTypes, key: keyof FilterTypes) => {
+      acc[key] = list[key].filter(item => !activeList[key].includes(item))
+      return acc;
+    }, {})
   })
 
-  const authorityCondition = createCondition('authority')
-  const mintCondition = createCondition('mint')
-  const materialCondition = createCondition('material')
-  const portraitCondition = createCondition('portrait')
+  // Generate the filter object based on active filters
+  const filter = computed(() => {
+    return {
+      _and: [
+        { status: { _eq: status } },
+        // If a filter is active, include it, otherwise, include all from the main list or null
+        ...Object.keys(list).map((key: keyof FilterTypes) => {
+          return activeList[key]?.length > 0
+            ? { [key]: { _in: activeList[key] } }
+            : { "_or": [ { [key]: { _in: list[key] } }, { [key]: { _null: true } } ] }
+        }),
+      ],
+    }
+  })
 
-  const filterQuery = computed(() => ({
-    _and: [
-      {
-        status: {
-          _eq: status,
-        },
-      },
-      authorityCondition.value,
-      mintCondition.value,
-      materialCondition.value,
-      portraitCondition.value
-    ],
-  }))
-
+  // Fetch the filter data and populate the main and active lists
   async function fetch() {
     const { data } = await useAsyncGql('GetFilters')
     const filtersData = data?.value?.filters || []
 
+    filtersData.forEach((filter: any) => {
+      for (const key in filter) {
+        if (filter.hasOwnProperty(key)) {
+          if (!list[key]) {
+            list[key] = []
+          }
+          list[key].push(filter[key])
+          if (!activeList[key]) {
+            activeList[key] = []
+          }
+        }
+      }
+    })
+
     for (const key in list) {
       if (list.hasOwnProperty(key)) {
-        list[key as keyof ListItem] = processFilters(filtersData.flatMap(item => item[key as keyof typeof item] || []));
+        list[key] = processFilters(list[key])
       }
     }
-
-    coinsStore.fetchCoins()
-    coinsStore.goToPage(1)
   }
 
-  function setActive(slug: keyof ListItem, item: string) {
-    if (slug in activeList && !activeList[slug].includes(item)) {
+  function setActive(slug: keyof FilterTypes, item: string) {
+    if (!activeList[slug].includes(item)) {
       activeList[slug].push(item)
-      coinsStore.fetchCoins()
-      coinsStore.goToPage(1)
     }
   }
 
-  function removeActive(slug: keyof ListItem, item: string) {
-    if (slug in activeList) {
-      activeList[slug] = activeList[slug].filter(el => el !== item)
-      coinsStore.fetchCoins()
-      coinsStore.goToPage(1)
-    }
+  function removeActive(slug: keyof FilterTypes, item: string) {
+    activeList[slug] = activeList[slug].filter(el => el !== item)
   }
 
-  function reset(slug: keyof ListItem) {
+  function reset(slug: keyof FilterTypes) {
     activeList[slug] = []
-    coinsStore.fetchCoins()
-    coinsStore.goToPage(1)
   }
-
-  function createCondition<T extends keyof ListItem>(key: T) {
-    return computed(() => {
-      if (activeList[key].length > 0) {
-        return {
-          [key]: {
-            _in: activeList[key],
-          },
-        };
-      } else {
-        return {
-          "_or": [
-            {
-              [key]: {
-                _in: list[key],
-              },
-            },
-            {
-              [key]: {
-                _null: true,
-              },
-            },
-          ],
-        };
-      }
-    });
-  }  
 
   return {
-    fetch, list, activeList, inactiveList, setActive, removeActive, reset, filterQuery, status
+    fetch, list, activeList, inactiveList, setActive, removeActive, reset, filter, status
   }
 })
+
+interface FilterTypes {
+  [key: string]: string[]
+}
+
+// Process filters: remove null or undefined items, create a unique set and sort it
+function processFilters(data: (string | null | undefined)[]): string[] {
+  const validData = data.filter(item => item !== null && item !== undefined) as string[]
+  const uniqueData = [...new Set(validData)]
+
+  // Sort the data in lexicographical order considering numeric parts as numbers (a.k.a. "natural" sorting)
+  return uniqueData.sort((a: string, b: string) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
+}

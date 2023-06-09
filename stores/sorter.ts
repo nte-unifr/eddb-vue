@@ -1,34 +1,17 @@
 export const useSorterStore = defineStore('sorter', () => {
 
-  interface Option {
-    type: string
-    criteria: string[]
+  const options = ref(<any>[])
+  const sort = ref([''])
+
+  async function fetch() {
+    const optionsContent = await queryContent('sort').sort({ order: 1 }).find()
+    options.value = optionsContent
+    sort.value = optionsContent[0].criteria
   }
 
-  interface Options {
-    [key: string]: Option
+  function setSort(criteria: string[]) {
+    sort.value = criteria
   }
 
-  const options: Options = {
-    identifiant: {
-      type: 'letters',
-      criteria: ['identifier']
-    },
-    date: {
-      type: 'numbers',
-      criteria: ['date_from', 'identifier']
-    }
-  }
-
-  const sort = ref('identifiant')
-  const criteria = computed(() => {
-    return options[sort.value].criteria
-  })
-
-
-  function setSort(o: string) {
-    sort.value = o
-  }
-
-  return { options, sort, criteria, setSort }
+  return { options, sort, setSort, fetch }
 })

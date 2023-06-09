@@ -8,8 +8,8 @@ const store = useFiltersStore()
 
 <template>
   <div class="dropdown">
-    <label v-if="store.activeList[slug].length" tabindex="0" class="btn btn-sm btn-outline btn-primary m-1 normal-case">
-      {{ title }} ({{ store.activeList[slug].length }}) <IconCaretDown />
+    <label v-if="store.activeList[slug]?.length" tabindex="0" class="btn btn-sm btn-outline btn-primary m-1 normal-case">
+      {{ title }} ({{ store.activeList[slug]?.length }}) <IconCaretDown />
     </label>
     <label v-else tabindex="0" class="btn btn-sm btn-outline m-1 normal-case">
       {{ title }}&nbsp;<IconCaretDown />

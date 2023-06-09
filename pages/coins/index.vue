@@ -8,7 +8,7 @@ filters.fetch()
 <template>
   <div class="min-h-screen max-w-screen-2xl bg-base-300 pt-24 px-8">
     <div class="flex my-4">
-      <Sorting />
+      <Sorter />
       <div class="grow"></div>
       <Pagination />
     </div>
@@ -17,7 +17,6 @@ filters.fetch()
       <Filterbis title="Portrait" slug="portrait" />
       <Filterbis title="Atelier" slug="mint" />
       <Filterbis title="Métal" slug="material" />
-      <p class="ml-2"><strong>{{ store.totalFiltered }}</strong>&nbsp;résultats sur&nbsp;<strong>{{ store.total }}</strong></p>
     </div>
     <label for="main-drawer" class="btn btn-link drawer-button lg:hidden">Afficher les filtres</label>
     <table class="table w-full">

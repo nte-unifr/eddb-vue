@@ -1,0 +1,6 @@
+{
+  "title": "identifiant",
+  "type": "letters",
+  "criteria": ["identifier"],
+  "order": 1
+}

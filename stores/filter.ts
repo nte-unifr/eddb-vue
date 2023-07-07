@@ -1,6 +1,5 @@
 export const useFilterStore = defineStore('filter', () => {
   const status = 'pending'
-
   const filters: Ref<Filter[]> = ref([])
 
   // Generate the filter object based on active filters

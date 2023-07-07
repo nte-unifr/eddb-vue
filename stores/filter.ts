@@ -1,18 +1,14 @@
 export const useFilterStore = defineStore('filter', () => {
-  const status = 'pending'
   const filters: Ref<Filter[]> = ref([])
 
   // Generate the filter object based on active filters
   const filter = computed(() => {
     return {
-      _and: [
-        { status: { _eq: status } },
-        ...filters.value.map(filter => {
-          return filter.data.activeList.length > 0
-            ? { [filter.criteria]: { _in: filter.data.activeList } }
-            : { "_or": [ { [filter.criteria]: { _in: filter.data.list } }, { [filter.criteria]: { _null: true } } ] }
-        }),
-      ],
+      _and: filters.value.map(filter => {
+        return filter.data.activeList.length > 0
+          ? { [filter.criteria]: { _in: filter.data.activeList } }
+          : { "_or": [ { [filter.criteria]: { _in: filter.data.list } }, { [filter.criteria]: { _null: true } } ] }
+      }),
     }
   })
 
@@ -74,6 +70,6 @@ export const useFilterStore = defineStore('filter', () => {
   }
 
   return {
-    filter, filters, getInactiveList, fetch, status, setActive, removeActive, reset, resetAll
+    filter, filters, getInactiveList, fetch, setActive, removeActive, reset, resetAll
   }
 })

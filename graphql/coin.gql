@@ -1,5 +1,5 @@
-query GetCoins($limit: Int!, $page: Int!, $sort: [String!]!, $filter: coins_filter!, $status: String!) {
-	coins_aggregated(filter: {status: {_eq: $status} }) {
+query GetCoins($limit: Int!, $page: Int!, $sort: [String!]!, $filter: coins_filter!) {
+	coins_aggregated {
     count {
       id
 		}

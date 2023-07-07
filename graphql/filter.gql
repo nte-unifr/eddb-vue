@@ -1,5 +1,5 @@
 query GetFilters {
-	filters: coins(limit: -1, filter: {status: {_eq: "pending"} }) {
+	filters: coins(limit: -1) {
 		authority
 		portrait
     mint
@@ -8,7 +8,7 @@ query GetFilters {
 }
 
 query GetMultiSelect {
-	filters: coins(limit: -1, filter: {status: {_eq: "pending"} }) {
+	filters: coins(limit: -1) {
 		authority
 		portrait
     mint

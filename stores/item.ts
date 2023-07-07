@@ -14,12 +14,12 @@ export const useItemStore = defineStore('item', () => {
         subtitle: itemData.authority,
         images: [
           {
-            url: dThumbnail(itemData.image_obverse?.id, ''),
+            url: dThumbnail(itemData.image_obverse?.id, 'details'),
             title: 'Avers',
             description: itemData.obverse
           },
           {
-            url: dThumbnail(itemData.image_reverse?.id, ''),
+            url: dThumbnail(itemData.image_reverse?.id, 'details'),
             title: 'Revers',
             description: itemData.reverse
           }

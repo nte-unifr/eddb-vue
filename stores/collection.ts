@@ -24,8 +24,7 @@ export const useCollectionStore = defineStore('collection', () => {
       limit: pagerStore.limit,
       page: pagerStore.page,
       sort: sorterStore.sort,
-      filter: filterStore.filter,
-      status: filterStore.status
+      filter: filterStore.filter
     })
     total.value = data?.value?.coins_aggregated[0]?.count?.id || 0
     pagerStore.total = data?.value?.total?.length || 0
@@ -37,11 +36,11 @@ export const useCollectionStore = defineStore('collection', () => {
         subtitle: itemData.authority,
         images: [
           {
-            url: dThumbnail(itemData.image_obverse?.id, 'list-thumbnail'),
+            url: dThumbnail(itemData.image_obverse?.id, 'table'),
             title: 'Avers'
           },
           {
-            url: dThumbnail(itemData.image_reverse?.id, 'list-thumbnail'),
+            url: dThumbnail(itemData.image_reverse?.id, 'table'),
             title: 'Revers'
           }
         ],

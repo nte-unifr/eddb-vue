@@ -18,27 +18,29 @@ export const useFilterStore = defineStore('filter', () => {
   })
 
   async function fetch() {
-    const multiSelectOptions = await fetchOptions('GetMultiSelect')
+    if(filters.value.length === 0) {
+      const multiSelectOptions = await fetchOptions('GetMultiSelect')
 
-    const data = await queryContent('filter').sort({ id: 1 }).find()
-    filters.value = data.map((filterData: any) => {
-      let list = multiSelectOptions.map((option: any) => {
-        return option[filterData.criteria]
-      })
+      const data = await queryContent('filter').sort({ id: 1 }).find()
+      filters.value = data.map((filterData: any) => {
+        let list = multiSelectOptions.map((option: any) => {
+          return option[filterData.criteria]
+        })
 
-      list = sanitizeAndSort(list)
+        list = sanitizeAndSort(list)
 
-      return {
-        id: filterData.id,
-        title: filterData.title,
-        type: filterData.type,
-        criteria: filterData.criteria,
-        data: {
-          list: list,
-          activeList: []
+        return {
+          id: filterData.id,
+          title: filterData.title,
+          type: filterData.type,
+          criteria: filterData.criteria,
+          data: {
+            list: list,
+            activeList: []
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   function getInactiveList(filter: Filter) {

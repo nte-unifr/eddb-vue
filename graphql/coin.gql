@@ -50,6 +50,7 @@ query GetCoin($id: ID!) {
 		axis
 		comment
 		date_explanation
+		reference
 		bibliography
 	}
 }

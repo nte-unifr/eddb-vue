@@ -65,6 +65,12 @@ export const useItemStore = defineStore('item', () => {
               value: itemData.comment + ' ' + itemData.date_explanation
             },
             {
+              title: 'Référence',
+              value: itemData.reference,
+              emptyDisplay: true,
+              html: true
+            },
+            {
               title: 'Bibliographie',
               value: itemData.bibliography,
               html: true

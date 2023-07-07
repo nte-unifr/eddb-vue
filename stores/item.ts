@@ -2,6 +2,7 @@ export const useItemStore = defineStore('item', () => {
   const item: Ref<Item|undefined> = ref()
 
   async function fetch(id: string) {
+    item.value = undefined
     const { data } = await useAsyncGql('GetCoin', { id: id })
 
     const itemData: any = data?.value?.coin

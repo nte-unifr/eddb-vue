@@ -8,7 +8,7 @@ defineProps({
   <div class="text-lg breadcrumbs">
     <ul>
       <li>
-        <NuxtLink to="/collection">Pièces</NuxtLink>
+        <NuxtLink to="/collection">Collection</NuxtLink>
       </li>
       <li>ID#{{ id }}</li>
     </ul>

@@ -12,7 +12,6 @@ function scrollToTop() {
 
 <template>
   <div class="flex items-center">
-    {{ y }}
     <p class="mr-4 hidden lg:block"><strong>{{ store.total }}</strong>&nbsp;résultats sur&nbsp;<strong>{{ collectionStore.total }}</strong></p>
     <div class="btn-group">
       <button @click="scrollToTop(); store.prev();" class="btn btn-sm btn-ghost" :class="{ 'btn-disabled': store.page == 1 }">

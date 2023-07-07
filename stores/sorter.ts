@@ -4,7 +4,7 @@ export const useSorterStore = defineStore('sorter', () => {
   const sort = ref([''])
 
   async function fetch() {
-    const optionsContent = await queryContent('sort').sort({ order: 1 }).find()
+    const optionsContent = await queryContent('sorter').sort({ order: 1 }).find()
     options.value = optionsContent
     sort.value = optionsContent[0].criteria
   }

@@ -1,5 +1,5 @@
 <script setup>
-const coinsStore = useCoinsStore()
+const collectionStore = useCollectionStore()
 const store = usePagerStore()
 
 function scrollToTop() {
@@ -12,7 +12,7 @@ function scrollToTop() {
 
 <template>
   <div class="flex items-center">
-    <p class="mr-4"><strong>{{ store.total }}</strong>&nbsp;résultats sur&nbsp;<strong>{{ coinsStore.total }}</strong></p>
+    <p class="mr-4"><strong>{{ store.total }}</strong>&nbsp;résultats sur&nbsp;<strong>{{ collectionStore.total }}</strong></p>
     <div class="btn-group">
       <button @click="store.prev()" class="btn btn-sm btn-ghost" :class="{ 'btn-disabled': store.page == 1 }">
         <IconPrev />

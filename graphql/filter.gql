@@ -6,3 +6,12 @@ query GetFilters {
 		material
 	}
 }
+
+query GetMultiSelect {
+	filters: coins(limit: -1, filter: {status: {_eq: "pending"} }) {
+		authority
+		portrait
+    mint
+		material
+	}
+}

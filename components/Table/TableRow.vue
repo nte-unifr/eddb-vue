@@ -17,10 +17,10 @@ defineProps<{
       </div>
       <div v-if="item.subtitle" class="text-sm font-bold">{{ item.subtitle }}</div>
     </td>
-    <td>
+    <td class="hidden lg:table-cell">
       <MiscDates :from="item.dates[0]" :to="item.dates[1]" />
     </td>
-    <td>
+    <td class="hidden lg:table-cell">
       <template v-for="tag in item.tags">
         <div v-if="tag.value" class="badge badge-ghost mr-2 inline">
           <span class="font-bold">{{ tag.title }}:</span>&nbsp;{{ tag.value }}

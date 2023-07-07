@@ -10,20 +10,21 @@ store.fetch()
       <div class="grow"></div>
       <TablePager />
     </div>
-    <div class="flex items-center my-4">
+    <div class="flex flex-col lg:flex-row my-4">
       <TableFilter />
     </div>
-    <label for="main-drawer" class="btn btn-link drawer-button lg:hidden">Afficher les filtres</label>
-    <table class="table w-full">
-      <thead>
-        <tr><th>Images</th><th>Identification</th><th>Datation</th><th>Infos</th></tr>
+    <table class="table w-full bg-base-100">
+      <thead class="sticky top-16 z-20 bg-base-200">
+        <tr>
+          <th class="text-base">Images</th>
+          <th class="text-base">Identification</th>
+          <th class="text-base hidden lg:table-cell">Datation</th>
+          <th class="text-base hidden lg:table-cell">Informations</th>
+        </tr>
       </thead>
       <tbody>
         <TableRow v-for="item in store.items" :key="item.id" :item="item" />
       </tbody>
-      <tfoot>
-        <tr><th>Images</th><th>Identification</th><th>Datation</th><th>Infos</th></tr>
-      </tfoot>
     </table>
     <div class="flex my-4">
       <div class="grow"></div>

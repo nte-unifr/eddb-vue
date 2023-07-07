@@ -13,10 +13,10 @@ const active = computed(() => {
   <div class="dropdown">
     <label :class="{ 'btn-primary': active }" tabindex="0" class="btn btn-sm btn-outline m-1 normal-case">
       {{ filter.title }}&nbsp;
-      <span v-if="active">({{ active }})</span>
+      <template v-if="active">({{ active }})</template>
       <IconCaretDown />
     </label>
-    <div tabindex="0" class="dropdown-content bg-base-100 card w-96 shadow-xl">
+    <div tabindex="0" class="dropdown-content z-30 bg-base-100 card w-96 shadow-xl">
       <div class="card-body p-4">
         <h2 class="card-title">{{ filter.title }}</h2>
         <div>

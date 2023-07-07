@@ -23,6 +23,9 @@ store.fetch()
         </tr>
       </thead>
       <tbody>
+        <tr v-if="store.items?.length === 0">
+          <td class="font-semibold">Aucun résultat</td>
+        </tr>
         <TableRow v-for="item in store.items" :key="item.id" :item="item" />
       </tbody>
     </table>

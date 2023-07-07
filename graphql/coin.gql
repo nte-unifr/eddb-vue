@@ -49,6 +49,7 @@ query GetCoin($id: ID!) {
 		diameter
 		axis
 		comment
+		date_explanation
 		bibliography
 	}
 }

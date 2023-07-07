@@ -62,7 +62,7 @@ export const useItemStore = defineStore('item', () => {
           [
             {
               title: 'Commentaire',
-              value: itemData.comment
+              value: itemData.comment + ' ' + itemData.date_explanation
             },
             {
               title: 'Bibliographie',

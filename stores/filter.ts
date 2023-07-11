@@ -1,75 +1,77 @@
+import { MultiSelectFilter } from '~/types/MultiSelectFilter'
+import { TextFilter } from '~/types/TextFilter'
+
 export const useFilterStore = defineStore('filter', () => {
-  const filters: Ref<Filter[]> = ref([])
+  const filters: Ref<(TextFilter | MultiSelectFilter)[]> = ref([])
 
   // Generate the filter object based on active filters
   const filter = computed(() => {
     return {
-      _and: filters.value.map(filter => {
-        return filter.data.activeList.length > 0
-          ? { [filter.criteria]: { _in: filter.data.activeList } }
-          : { "_or": [ { [filter.criteria]: { _in: filter.data.list } }, { [filter.criteria]: { _null: true } } ] }
-      }),
+      _and: filters.value.map(filter => filter.getFilterValue())
     }
   })
 
   async function fetch() {
     if(filters.value.length === 0) {
       const multiSelectOptions = await fetchOptions('GetMultiSelect')
-
       const data = await queryContent('filter').sort({ id: 1 }).find()
+
       filters.value = data.map((filterData: any) => {
-        let list = multiSelectOptions.map((option: any) => {
-          return option[filterData.criteria]
-        })
-
-        list = sanitizeAndSort(list)
-
-        return {
-          id: filterData.id,
-          title: filterData.title,
-          type: filterData.type,
-          criteria: filterData.criteria,
-          data: {
-            list: list,
-            activeList: []
-          }
+        if (filterData.type === 'multiselect') {
+          let list = sanitizeAndSort(multiSelectOptions.map((option: any) => option[filterData.criteria]))
+          return new MultiSelectFilter(filterData.id, filterData.title, filterData.type, filterData.criteria, list)
+        } else if (filterData.type === 'text') {
+          return new TextFilter(filterData.id, filterData.title, filterData.type, filterData.criteria, filterData.placeholder)
         }
-      })
+      }).filter(isDefined)
     }
   }
 
-  function getInactiveList(filter: Filter) {
-    return filter.data.list.filter(item => !filter.data.activeList.includes(item))
+  // MultiSelectFilter functions
+
+  function getInactiveList(filter: MultiSelectFilter) {
+    return filter.list.filter(item => !filter.activeList.includes(item))
   }
 
-  function setActive(filter: Filter, option: string) {
-    let list = filter.data.activeList
+  function setActive(filter: MultiSelectFilter, option: string) {
+    let list = filter.activeList
     if (!list.includes(option)) {
       list.push(option)
       sortAlpha(list)
     }
   }
 
-  function removeActive(filter: Filter, option: string) {
-    filter.data.activeList = filter.data.activeList.filter(el => el !== option)
+  function removeActive(filter: MultiSelectFilter, option: string) {
+    filter.activeList = filter.activeList.filter(el => el !== option)
   }
 
-  function reset(filter: Filter) {
-    filter.data.activeList = []
+  // General functions
+
+  function reset(filter: (TextFilter | MultiSelectFilter)) {
+    if (filter.type === 'multiselect') {
+      (filter as MultiSelectFilter).activeList = []
+
+    } else if (filter.type === 'text') {
+      (filter as TextFilter).search = ''
+    }
   }
 
   function resetAll() {
     filters.value.forEach(filter => {
-      filter.data.activeList = []
+      reset(filter)
     })
-  }
-
-  async function fetchOptions(type: string) {
-    const { data } = await useAsyncGql('GetMultiSelect')
-    return data?.value?.filters || []
   }
 
   return {
     filter, filters, getInactiveList, fetch, setActive, removeActive, reset, resetAll
   }
 })
+
+function isDefined<T>(arg: T | undefined): arg is T {
+  return arg !== undefined;
+}
+
+async function fetchOptions(type: string) {
+  const { data } = await useAsyncGql('GetMultiSelect')
+  return data?.value?.filters || []
+}

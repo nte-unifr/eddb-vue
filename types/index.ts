@@ -30,17 +30,4 @@ declare global {
     description?: string;
   }
 
-  interface Filter {
-    id: number;
-    title: string;
-    type: string;
-    criteria: string;
-    data: MultiSelect;
-  }
-
-  interface MultiSelect {
-    list: string[];
-    activeList: string[];
-  }
-
 }

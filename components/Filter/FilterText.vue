@@ -1,0 +1,29 @@
+<script setup lang="ts">
+import { TextFilter } from '~/types/TextFilter'
+
+const props = defineProps<{
+  filter: TextFilter
+}>()
+const store = useFilterStore()
+</script>
+
+<template>
+  <div class="dropdown">
+    <label :class="{ 'btn-primary': filter.search }" tabindex="0" class="btn btn-sm btn-outline m-1 normal-case">
+      {{ filter.title }}&nbsp;
+      <template v-if="filter.search">({{ filter.search }})</template>
+      <IconCaretDown />
+    </label>
+    <div tabindex="0" class="dropdown-content z-30 bg-base-100 card w-96 shadow-xl">
+      <div class="card-body p-4">
+        <h2 class="card-title">{{ filter.title }}</h2>
+        <div class="form-control w-full max-w-xs">
+          <input v-model="filter.search" :placeholder="filter.placeholder"  type="text" class="input input-bordered w-full max-w-xs" />
+        </div>
+        <div>
+          <a @click="store.reset(filter)" class="link text-sm">Réinitialiser</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

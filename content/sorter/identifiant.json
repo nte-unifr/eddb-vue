@@ -1,5 +1,5 @@
 {
-  "title": "identifiant",
+  "title": "Numéro d'inventaire",
   "type": "letters",
   "criteria": ["identifier"],
   "order": 1

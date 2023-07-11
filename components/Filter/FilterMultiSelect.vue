@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { MultiSelectFilter } from '~/types/MultiSelectFilter'
+
 const props = defineProps<{
-  filter: Filter
+  filter: MultiSelectFilter
 }>()
 const store = useFilterStore()
 
 const active = computed(() => {
-  return props.filter.data.activeList.length
+  return props.filter.activeList.length
 })
 </script>
 
@@ -20,7 +22,7 @@ const active = computed(() => {
       <div class="card-body p-4">
         <h2 class="card-title">{{ filter.title }}</h2>
         <div>
-          <a v-for="option in filter.data.activeList" @click="store.removeActive(filter, option)" class="badge badge-primary mr-2 cursor-pointer">
+          <a v-for="option in filter.activeList" @click="store.removeActive(filter, option)" class="badge badge-primary mr-2 cursor-pointer">
             <IconX />&nbsp;{{ option }}
           </a>
         </div>

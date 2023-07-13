@@ -13,7 +13,7 @@ export const useFilterStore = defineStore('filter', () => {
 
   async function fetch() {
     if(filters.value.length === 0) {
-      const multiSelectOptions = await fetchOptions('GetMultiSelect')
+      const multiSelectOptions = await fetchOptions()
       const data = await queryContent('filter').sort({ id: 1 }).find()
 
       filters.value = data.map((filterData: any) => {
@@ -27,43 +27,14 @@ export const useFilterStore = defineStore('filter', () => {
     }
   }
 
-  // MultiSelectFilter functions
-
-  function getInactiveList(filter: MultiSelectFilter) {
-    return filter.list.filter(item => !filter.activeList.includes(item))
-  }
-
-  function setActive(filter: MultiSelectFilter, option: string) {
-    let list = filter.activeList
-    if (!list.includes(option)) {
-      list.push(option)
-      sortAlpha(list)
-    }
-  }
-
-  function removeActive(filter: MultiSelectFilter, option: string) {
-    filter.activeList = filter.activeList.filter(el => el !== option)
-  }
-
-  // General functions
-
-  function reset(filter: (TextFilter | MultiSelectFilter)) {
-    if (filter.type === 'multiselect') {
-      (filter as MultiSelectFilter).activeList = []
-
-    } else if (filter.type === 'text') {
-      (filter as TextFilter).search = ''
-    }
-  }
-
   function resetAll() {
     filters.value.forEach(filter => {
-      reset(filter)
+      filter.reset()
     })
   }
 
   return {
-    filter, filters, getInactiveList, fetch, setActive, removeActive, reset, resetAll
+    filter, filters, fetch, resetAll
   }
 })
 
@@ -71,7 +42,7 @@ function isDefined<T>(arg: T | undefined): arg is T {
   return arg !== undefined;
 }
 
-async function fetchOptions(type: string) {
-  const { data } = await useAsyncGql('GetMultiSelect')
+async function fetchOptions() {
+  const { data } = await useAsyncGql('GetMultiSelectOptions')
   return data?.value?.filters || []
 }

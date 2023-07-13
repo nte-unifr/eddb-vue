@@ -10,6 +10,10 @@ export class TextFilter extends BaseFilter {
     this.placeholder = placeholder;
   }
 
+  reset() {
+    this.search = ''
+  }
+
   getFilterValue() {
     return this.search != ''
       ? { [this.criteria]: { _contains: this.search } }

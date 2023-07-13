@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { TextFilter } from '~/types/TextFilter'
 
-const props = defineProps<{
+defineProps<{
   filter: TextFilter
 }>()
-const store = useFilterStore()
 </script>
 
 <template>
@@ -21,7 +20,7 @@ const store = useFilterStore()
           <input v-model="filter.search" :placeholder="filter.placeholder"  type="text" class="input input-bordered w-full max-w-xs" />
         </div>
         <div>
-          <a @click="store.reset(filter)" class="link text-sm">Réinitialiser</a>
+          <a @click="filter.reset()" class="link text-sm">Réinitialiser</a>
         </div>
       </div>
     </div>

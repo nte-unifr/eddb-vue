@@ -1,13 +1,4 @@
-query GetFilters {
-	filters: coins(limit: -1) {
-		authority
-		portrait
-    mint
-		material
-	}
-}
-
-query GetMultiSelect {
+query GetMultiSelectOptions {
 	filters: coins(limit: -1) {
 		authority
 		portrait

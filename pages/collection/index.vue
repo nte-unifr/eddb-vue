@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const store = useCollectionStore()
 store.fetch()
 </script>

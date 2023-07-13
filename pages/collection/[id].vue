@@ -1,12 +1,13 @@
-<script setup>
+<script setup lang="ts">
 const { id } = useRoute().params
 const store = useItemStore()
-store.fetch(id)
+const identifier = Array.isArray(id) ? id[0] : id
+store.fetch(identifier)
 </script>
 
 <template>
   <div class="container mx-auto max-w-5xl">
-    <DetailsBreadcrumbs :id="id" />
+    <DetailsBreadcrumbs :id="identifier" />
     <div class="bg-base-100 shadow-xl rounded-xl p-10">
       <div v-if="store.item">
         <div class="mb-10">

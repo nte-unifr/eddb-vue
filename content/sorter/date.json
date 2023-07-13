@@ -1,6 +1,0 @@
-{
-  "title": "date",
-  "type": "numbers",
-  "criteria": ["date_from", "identifier"],
-  "order": 2
-}

@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Numéro d'inventaire",
+    "type": "letters",
+    "criteria": ["identifier"]
+  },
+  {
+    "title": "Date",
+    "type": "numbers",
+    "criteria": ["date_from", "identifier"]
+  }
+]

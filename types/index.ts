@@ -2,6 +2,12 @@ export { }
 
 declare global {
 
+  interface Sorter {
+    title: string;
+    type: string;
+    criteria: string[];
+  }
+
   interface Item {
     id: number;
     title: string;

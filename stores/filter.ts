@@ -14,7 +14,7 @@ export const useFilterStore = defineStore('filter', () => {
   async function fetch() {
     if(filters.value.length === 0) {
       const multiSelectOptions = await fetchOptions()
-      const { data } = await useFetch('/data/filters.json')
+      const { data } = await useFetch('/data/filter.json')
 
       filters.value = (data.value as Object[]).map((filterData: any) => {
         if (filterData.type === 'multiselect') {

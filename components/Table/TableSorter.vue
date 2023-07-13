@@ -4,9 +4,9 @@ store.fetch()
 </script>
 
 <template>
-  <a v-for="option in store.options" @click="store.setSort(option.criteria)" class="btn btn-sm btn-ghost mr-4" :class="{ 'btn-link': store.sort == option.criteria }">
-    <IconAscendingLetters class="inline" v-if="option.type == 'letters'" />
-    <IconAscendingNumbers class="inline" v-if="option.type == 'numbers'" />
-    <span class="hidden lg:inline">{{ option.title }}</span>
+  <a v-for="sorter in store.sorters" @click="store.setActive(sorter)" class="btn btn-sm btn-ghost mr-4" :class="{ 'btn-link': store.active === sorter }">
+    <IconAscendingLetters v-if="sorter.type == 'letters'" class="inline" />
+    <IconAscendingNumbers v-if="sorter.type == 'numbers'" class="inline" />
+    <span class="hidden lg:inline">{{ sorter.title }}</span>
   </a>
 </template>

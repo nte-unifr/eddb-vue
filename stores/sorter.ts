@@ -1,19 +1,23 @@
 export const useSorterStore = defineStore('sorter', () => {
 
-  const options = ref(<any>[])
-  const sort = ref([''])
+  const sorters: Ref<Sorter[]> = ref([])
+  const active: Ref<Sorter|null> = ref(null)
+
+  const sort = computed(() => {
+    return active.value?.criteria || 'id'
+  })
 
   async function fetch() {
-    if(options.value.length === 0) {
-      const optionsContent = await queryContent('sorter').sort({ order: 1 }).find()
-      options.value = optionsContent
-      sort.value = optionsContent[0].criteria
+    if (sorters.value.length === 0) {
+      const { data } = await useFetch('/data/sorter.json')
+      sorters.value = data.value as Sorter[]
+      active.value = sorters.value[0]
     }
   }
 
-  function setSort(criteria: string[]) {
-    sort.value = criteria
+  function setActive(sorter: Sorter) {
+    active.value = sorter
   }
 
-  return { options, sort, setSort, fetch }
+  return { sort, sorters, active, setActive, fetch }
 })

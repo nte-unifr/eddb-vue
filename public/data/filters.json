@@ -1,0 +1,45 @@
+[
+  {
+    "title": "Numéro d'inventaire",
+    "criteria": "identifier",
+    "type": "text",
+    "placeholder": "ex: CPS 1015"
+  },
+  {
+    "title": "Autorité émettrice",
+    "criteria": "authority",
+    "type": "multiselect"
+  },
+  {
+    "title": "Portrait",
+    "criteria": "portrait",
+    "type": "multiselect"
+  },
+  {
+    "title": "Atelier",
+    "criteria": "mint",
+    "type": "multiselect"
+  },
+  {
+    "title": "Métal",
+    "criteria": "material",
+    "type": "multiselect"
+  },
+  {
+    "title": "Dénomination",
+    "criteria": "denomination",
+    "type": "multiselect"
+  },
+  {
+    "title": "Référence bibliographique",
+    "criteria": "bibliography",
+    "type": "text",
+    "placeholder": "ex: Yarrow 2021"
+  },
+  {
+    "title": "Mots-clés",
+    "criteria": "comment",
+    "type": "text",
+    "placeholder": "ex: sanctuaire"
+  }
+]

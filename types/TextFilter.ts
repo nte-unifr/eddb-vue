@@ -17,6 +17,6 @@ export class TextFilter extends BaseFilter {
   getFilterValue() {
     return this.search != ''
       ? { [this.criteria]: { _contains: this.search } }
-      : { [this.criteria]: { _nnull: true } }
+      : null
   }
 }

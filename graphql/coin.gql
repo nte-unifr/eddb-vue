@@ -23,6 +23,9 @@ query GetCoins($limit: Int!, $page: Int!, $sort: [String!]!, $filter: coins_filt
 		mint
 		material
 		denomination
+		comment
+		reference
+		bibliography
 	}
 }
 

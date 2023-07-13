@@ -7,16 +7,16 @@ export const useFilterStore = defineStore('filter', () => {
   // Generate the filter object based on active filters
   const filter = computed(() => {
     return {
-      _and: filters.value.map(filter => filter.getFilterValue())
+      _and: filters.value.map(filter => filter.getFilterValue()).filter(filterValue => filterValue !== null)
     }
   })
 
   async function fetch() {
     if(filters.value.length === 0) {
       const multiSelectOptions = await fetchOptions()
-      const data = await queryContent('filter').sort({ id: 1 }).find()
+      const { data } = await useFetch('/data/filters.json')
 
-      filters.value = data.map((filterData: any) => {
+      filters.value = (data.value as Object[]).map((filterData: any) => {
         if (filterData.type === 'multiselect') {
           let list = sanitizeAndSort(multiSelectOptions.map((option: any) => option[filterData.criteria]))
           return new MultiSelectFilter(filterData.id, filterData.title, filterData.type, filterData.criteria, list)

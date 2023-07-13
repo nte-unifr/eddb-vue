@@ -1,7 +1,0 @@
-{
-  "id": 1,
-  "title": "Numéro d'inventaire",
-  "criteria": "identifier",
-  "type": "text",
-  "placeholder": "ex: CPS 1015"
-}

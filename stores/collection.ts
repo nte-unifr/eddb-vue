@@ -36,11 +36,15 @@ export const useCollectionStore = defineStore('collection', () => {
         subtitle: itemData.authority,
         images: [
           {
-            url: dThumbnail(itemData.image_obverse?.id, 'table'),
+            url: {
+              thumb: dThumbnail(itemData.image_obverse?.id, 'thumb')
+            },
             title: 'Avers'
           },
           {
-            url: dThumbnail(itemData.image_reverse?.id, 'table'),
+            url: {
+              thumb: dThumbnail(itemData.image_reverse?.id, 'thumb')
+            },
             title: 'Revers'
           }
         ],

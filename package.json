@@ -16,9 +16,10 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
-    "daisyui": "^3.1.0",
+    "daisyui": "^3.2.0",
     "nuxt-graphql-client": "^0.2.25",
-    "pinia": "^2.1.4"
+    "pinia": "^2.1.4",
+    "vue-photo-zoom-pro": "^3.0.1"
   },
   "overrides": {
     "vue": "latest"

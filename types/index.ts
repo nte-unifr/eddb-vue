@@ -31,9 +31,15 @@ declare global {
   }
 
   interface Image {
-    url: string;
+    url: ImageUrl;
     title?: string;
     description?: string;
+  }
+
+  interface  ImageUrl {
+    thumb?: string;
+    details?: string;
+    full?: string;
   }
 
 }

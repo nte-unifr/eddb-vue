@@ -8,7 +8,7 @@ defineProps<{
   <tr>
     <td>
       <div class="flex w-40">
-        <img v-for="image in item.images" :src="image.url" :alt="image.title" class="mask mask-squircle w-20 h-20"  />
+        <img v-for="image in item.images" :src="image.url.thumb" :alt="image.title" class="mask mask-squircle w-20 h-20"  />
       </div>
     </td>
     <td>

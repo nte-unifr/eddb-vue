@@ -6,6 +6,9 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vueuse/nuxt'
   ],
+  plugins: [
+    '~/plugins/vue-photo-zoom-pro.js'
+  ],
   imports: {
     dirs: ['./stores']
   },

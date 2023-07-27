@@ -8,6 +8,27 @@ declare global {
     criteria: string[];
   }
 
+  interface Filter {
+    order: number;
+    title: string;
+    criteria: string;
+    type: string;
+  }
+
+  interface Option {
+    title: string;
+    active: boolean;
+  }
+
+  interface FilterMultiSelect extends Filter {
+    list: Option[]
+  }
+
+  interface FilterText extends Filter {
+    search: string;
+    placeholder: string;
+  }
+
   interface Item {
     id: number;
     title: string;

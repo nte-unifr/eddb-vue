@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const store = useSorterStore()
-store.fetch()
 </script>
 
 <template>

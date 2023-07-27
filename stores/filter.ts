@@ -1,48 +1,28 @@
-import { MultiSelectFilter } from '~/types/MultiSelectFilter'
-import { TextFilter } from '~/types/TextFilter'
-
 export const useFilterStore = defineStore('filter', () => {
-  const filters: Ref<(TextFilter | MultiSelectFilter)[]> = ref([])
 
-  // Generate the filter object based on active filters
+  const filterMultiselectStore = useFilterMultiselectStore()
+  const filterTextStore = useFilterTextStore()
+
   const filter = computed(() => {
     return {
-      _and: filters.value.map(filter => filter.getFilterValue()).filter(filterValue => filterValue !== null)
+      _and: [...filterMultiselectStore.filter, ...filterTextStore.filter]
     }
   })
 
-  async function fetch() {
-    if(filters.value.length === 0) {
-      const multiSelectOptions = await fetchOptions()
-      const { data } = await useFetch('/data/filter.json')
+  const filters = computed(() => {
+    return (filterMultiselectStore.filters as Filter[])
+      .concat(filterTextStore.filters as Filter[])
+      .sort((a, b) => (a.order || 0) - (b.order || 0));
+  })
 
-      filters.value = (data.value as Object[]).map((filterData: any) => {
-        if (filterData.type === 'multiselect') {
-          let list = sanitizeAndSort(multiSelectOptions.map((option: any) => option[filterData.criteria]))
-          return new MultiSelectFilter(filterData.id, filterData.title, filterData.type, filterData.criteria, list)
-        } else if (filterData.type === 'text') {
-          return new TextFilter(filterData.id, filterData.title, filterData.type, filterData.criteria, filterData.placeholder)
-        }
-      }).filter(isDefined)
-    }
+  async function fetch() {
+    await filterMultiselectStore.fetch()
   }
 
   function resetAll() {
-    filters.value.forEach(filter => {
-      filter.reset()
-    })
+    filterMultiselectStore.resetAll()
+    filterTextStore.resetAll()
   }
 
-  return {
-    filter, filters, fetch, resetAll
-  }
+  return { filter, filters, fetch, resetAll }
 })
-
-function isDefined<T>(arg: T | undefined): arg is T {
-  return arg !== undefined;
-}
-
-async function fetchOptions() {
-  const { data } = await useAsyncGql('GetMultiSelectOptions')
-  return data?.value?.filters || []
-}

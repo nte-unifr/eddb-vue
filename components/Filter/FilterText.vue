@@ -27,12 +27,3 @@ const store = useFilterTextStore()
     </div>
   </div>
 </template>
-
-<style scoped>
-.btn:hover {
-  @apply bg-gray-300;
-}
-.btn-primary:hover {
-  @apply bg-primary;
-}
-</style>

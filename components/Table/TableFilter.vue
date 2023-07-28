@@ -10,3 +10,12 @@ store.fetch()
   </template>
   <button @click="store.resetAll()" class="link ml-2">Tout réinitialiser</button>
 </template>
+
+<style scoped>
+:deep(.btn:hover) {
+  @apply bg-gray-300;
+}
+:deep(.btn-primary:hover) {
+  @apply bg-primary;
+}
+</style>

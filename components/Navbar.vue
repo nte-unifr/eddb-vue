@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const store = useSettingsStore()
+const settings = useSettingsStore()
+const global = useGlobalStore()
 </script>
 
 <template>
@@ -14,10 +15,10 @@ const store = useSettingsStore()
           <li><NuxtLink to="/about"><IconInfo /> A propos</NuxtLink></li>
         </ul>
       </div>
-      <img v-if="store.theme == 'light'" class="w-12 hidden lg:block" src="~/assets/img/unifr-black-96.png" alt="Unifr logo" />
-      <img v-if="store.theme == 'dark'" class="w-12 hidden lg:block" src="~/assets/img/unifr-white-96.png" alt="Unifr logo" />
+      <img v-if="settings.theme == 'light'" class="w-12 hidden lg:block" src="~/assets/img/unifr-black-96.png" alt="Unifr logo" />
+      <img v-if="settings.theme == 'dark'" class="w-12 hidden lg:block" src="~/assets/img/unifr-white-96.png" alt="Unifr logo" />
       <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">
-        {{ store.title }}
+        {{ global.title }}
       </NuxtLink>
       <ul class="menu menu-horizontal px-1 hidden lg:inline-flex">
         <li><NuxtLink to="/collection"><IconCollection /> Collection</NuxtLink></li>
@@ -25,10 +26,10 @@ const store = useSettingsStore()
       </ul>
     </div>
     <div class="navbar-end">
-      <button v-if="store.theme == 'light'" @click="store.setDarkTheme" class="btn btn-circle btn-ghost">
+      <button v-if="settings.theme == 'light'" @click="settings.setDarkTheme" class="btn btn-circle btn-ghost">
         <IconSun />
       </button>
-      <button v-if="store.theme == 'dark'" @click="store.setLightTheme" class="btn btn-circle btn-ghost">
+      <button v-if="settings.theme == 'dark'" @click="settings.setLightTheme" class="btn btn-circle btn-ghost">
         <IconMoon />
       </button>
     </div>

@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const store = useGlobalStore()
+</script>
+
 <template>
   <footer class="footer p-10 bg-neutral text-neutral-content">
     <div>
@@ -29,7 +33,10 @@
     <div>
       <span class="footer-title">Copyright</span>
       <div>
-        <p>© Université de Fribourg, Faculté des lettres et des sciences humaines, Département d’histoire / Musée d’art et d’histoire de Fribourg</p>
+        <div class="flex items-center">
+          <IconCopyright />
+          <div v-html="store.copyright" class="ml-2"></div>
+        </div>
       </div>
     </div>
   </footer>

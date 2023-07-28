@@ -1,9 +1,13 @@
+<script setup lang="ts">
+const store = useGlobalStore()
+</script>
+
 <template>
   <div class="hero min-h-screen">
     <div class="hero-content text-center">
       <div class="max-w-md">
-        <h1 class="text-5xl font-bold">NAFO Database</h1>
-        <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+        <h1 class="text-5xl font-bold">{{ store.longTitle }}</h1>
+        <p v-html="store.shortDescription" class="py-6"></p>
         <NuxtLink to="/collection" class="btn btn-primary">
           Parcourir la base de données
         </NuxtLink>

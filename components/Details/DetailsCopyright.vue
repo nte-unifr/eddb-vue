@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const store = useSettingsStore()
+const store = useGlobalStore()
 </script>
 
 <template>
   <div class="alert">
     <IconCopyright class="text-primary" />
-    <span>{{ store.copyright }}</span>
+    <div v-html="store.copyright"></div>
   </div>
 </template>

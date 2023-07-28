@@ -2,6 +2,12 @@
 const settings = useSettingsStore()
 const global = useGlobalStore()
 global.fetch()
+useHead({
+  title: global.longTitle,
+  meta: [
+    { name: global.longTitle, content: global.shortDescription }
+  ]
+})
 </script>
 
 <template>

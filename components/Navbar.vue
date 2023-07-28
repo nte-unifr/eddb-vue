@@ -3,7 +3,7 @@ const store = useSettingsStore()
 </script>
 
 <template>
-  <div class="navbar bg-base-100 fixed z-50">
+  <div class="navbar bg-base-100 fixed z-50 drop-shadow-md">
     <div class="navbar-start">
       <div class="dropdown">
         <label tabindex="0" class="btn btn-ghost lg:hidden">

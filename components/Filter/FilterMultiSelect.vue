@@ -20,7 +20,7 @@ const active = computed(() => {
 
 <template>
   <div class="dropdown">
-    <label :class="{ 'btn-primary': active }" tabindex="0" class="btn btn-sm btn-outline m-1 normal-case">
+    <label :class="{ 'btn-primary': active }" tabindex="0" class="btn btn-sm m-1 normal-case">
       <IconListDetails />
       {{ filter.title }}&nbsp;
       <template v-if="active">({{ active }})</template>
@@ -48,3 +48,12 @@ const active = computed(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.btn:hover {
+  @apply bg-gray-300;
+}
+.btn-primary:hover {
+  @apply bg-primary;
+}
+</style>

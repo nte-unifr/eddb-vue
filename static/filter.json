@@ -6,6 +6,11 @@
     "placeholder": "ex: CPS 1015"
   },
   {
+    "title": "Entité",
+    "criteria": "entity",
+    "type": "multiselect"
+  },
+  {
     "title": "Autorité émettrice",
     "criteria": "authority",
     "type": "multiselect"

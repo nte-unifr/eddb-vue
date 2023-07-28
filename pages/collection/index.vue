@@ -10,7 +10,7 @@ store.fetch()
       <div class="grow"></div>
       <TablePager />
     </div>
-    <div class="flex flex-col lg:flex-row my-4">
+    <div class="flex flex-col flex-wrap lg:flex-row my-4">
       <TableFilter />
     </div>
     <table class="table w-full bg-base-100">

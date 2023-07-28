@@ -1,5 +1,6 @@
 query GetMultiSelectOptions {
 	filters: coins(limit: -1) {
+		entity
 		authority
 		portrait
     mint

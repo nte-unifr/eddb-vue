@@ -10,6 +10,7 @@ query GetCoins($limit: Int!, $page: Int!, $sort: [String!]!, $filter: coins_filt
 	coins(limit: $limit, page: $page, filter: $filter, sort: $sort) {
 		id
 		identifier
+		entity
 		authority
 		portrait
 		date_from
@@ -33,6 +34,7 @@ query GetCoin($id: ID!) {
 	coin: coins_by_id(id: $id) {
 		id
 		identifier
+		entity
 		authority
 		portrait
 		date_from

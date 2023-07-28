@@ -33,7 +33,7 @@ export const useCollectionStore = defineStore('collection', () => {
       return {
         id: itemData.id,
         title: itemData.identifier,
-        subtitle: itemData.authority,
+        subtitle: itemData.entity,
         images: [
           {
             url: {
@@ -50,6 +50,10 @@ export const useCollectionStore = defineStore('collection', () => {
         ],
         dates: [itemData.date_from, itemData.date_to],
         tags: [
+          {
+            title: 'Autorité émettrice',
+            value: itemData.authority
+          },
           {
             title: 'Portrait',
             value: itemData.portrait

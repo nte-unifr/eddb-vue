@@ -17,8 +17,11 @@ defineProps<{
       </div>
       <div v-if="item.subtitle" class="text-sm font-bold">{{ item.subtitle }}</div>
     </td>
-    <td class="w-52 hidden lg:table-cell">
-      <MiscDates :from="item.dates[0]" :to="item.dates[1]" />
+    <td class="w-56 hidden lg:table-cell">
+      {{ formatDate(item.dates[0]) }}
+      <span v-if="item.dates[0] != item.dates[1]">
+        &#8211; {{ formatDate(item.dates[1]) }}
+      </span>
     </td>
     <td class="hidden lg:table-cell">
       <div class="">

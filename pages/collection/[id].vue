@@ -16,6 +16,11 @@ store.fetch(identifier)
         <div class="mb-8">
           <DetailsImage v-for="image in store.item?.images" :image="image" />
         </div>
+        <div class="table w-full">
+          <div class="table-row-group">
+            <DetailsDatation :dates="store.item.dates" />
+          </div>
+        </div>
         <template v-for="(propertiesGroup, index) in store.item?.properties" :key="index">
           <div class="table w-full">
             <div class="table-row-group">

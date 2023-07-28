@@ -9,6 +9,7 @@ const store = useFilterTextStore()
 <template>
   <div class="dropdown">
     <label :class="{ 'btn-primary': filter.search }" tabindex="0" class="btn btn-sm btn-outline m-1 normal-case">
+      <IconForms />
       {{ filter.title }}&nbsp;
       <template v-if="filter.search">({{ filter.search }})</template>
       <IconCaretDown />

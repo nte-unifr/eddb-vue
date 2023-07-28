@@ -7,7 +7,7 @@ defineProps<{
 <template>
   <figure class="flex flex-col lg:flex-row mb-2">
     <div class="lg:w-1/3 pr-6 lg:ml-10">
-      <vue-photo-zoom-pro :url="image.url.details" :high-url="image.url.full" width="120" class="mask mask-squircle w-64" />
+      <vue-photo-zoom-pro :url="image.url.details" :high-url="image.url.full" :width=120 class="mask mask-squircle w-64" />
     </div>
     <figcaption v-if="image.description" class="flex lg:w-2/3">
       <div class="my-auto">

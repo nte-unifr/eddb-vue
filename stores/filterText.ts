@@ -4,7 +4,7 @@ export const useFilterTextStore = defineStore('filterText', () => {
 
   const filtersData = data
     .map((item: any, index: number) => ({ ...item, order: index + 1, search: '' })) // assign order and add empty search
-    .filter((item: any) => item.type === 'text') // keep only multiselect items
+    .filter((item: any) => item.type === 'text') // keep only text items
 
   const filters: Ref<FilterText[]> = ref(filtersData)
 

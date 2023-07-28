@@ -11,8 +11,8 @@ declare global {
   interface Filter {
     order: number;
     title: string;
-    criteria: string;
     type: string;
+    criteria: string;
   }
 
   interface Option {
@@ -27,6 +27,13 @@ declare global {
   interface FilterText extends Filter {
     search: string;
     placeholder: string;
+  }
+
+  interface FilterRange extends Filter {
+    criteria2: string;
+    v1: string;
+    v2: string;
+    info?: string;
   }
 
   interface Item {

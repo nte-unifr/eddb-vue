@@ -19,7 +19,7 @@ export const useItemStore = defineStore('item', () => {
               full: dThumbnail(itemData.image_obverse?.id)
             },
             title: 'Avers',
-            description: itemData.obverse
+            description: itemData.description_obverse
           },
           {
             url: {
@@ -27,7 +27,7 @@ export const useItemStore = defineStore('item', () => {
               full: dThumbnail(itemData.image_reverse?.id)
             },
             title: 'Revers',
-            description: itemData.reverse
+            description: itemData.description_reverse
           }
         ],
         dates: [itemData.date_from, itemData.date_to],
@@ -68,7 +68,8 @@ export const useItemStore = defineStore('item', () => {
           [
             {
               title: 'Commentaire',
-              value: itemData.comment + ' ' + itemData.date_explanation
+              value: (itemData.comment || '') + ' ' + (itemData.date_explanation || ''),
+              html: true
             },
             {
               title: 'Référence',

@@ -42,11 +42,11 @@ query GetCoin($id: ID!) {
 		image_obverse {
 			id
 		}
-		obverse
+		description_obverse
 		image_reverse {
 			id
 		}
-		reverse
+		description_reverse
 		mint
 		material
 		denomination

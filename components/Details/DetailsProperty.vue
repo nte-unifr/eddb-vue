@@ -22,4 +22,7 @@ defineProps<{
   color: rgb(87, 13, 248);
   text-decoration: underline;
 }
+:deep(p) {
+  @apply mb-2;
+}
 </style>

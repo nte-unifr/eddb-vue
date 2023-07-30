@@ -12,7 +12,7 @@ defineProps<{
     <figcaption v-if="image.description" class="flex lg:w-2/3">
       <div class="my-auto">
         <h3 v-if="image.title" class="text-xl font-bold">{{ image.title }}</h3>
-        <p>{{ image.description }}</p>
+        <div v-html="image.description"></div>
         <div class="mt-4">
           <a :href="image.url.full" class="btn btn-sm" download><IconDownload /> Télécharger</a>
         </div>
@@ -20,3 +20,9 @@ defineProps<{
     </figcaption>
   </figure>
 </template>
+
+<style scoped>
+:deep(p) {
+  @apply mb-2;
+}
+</style>

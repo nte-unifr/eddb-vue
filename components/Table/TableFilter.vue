@@ -8,7 +8,7 @@ const store = useFilterStore()
     <FilterText v-if="filter.type === 'text'" :filter="(filter as FilterText)" />
     <FilterRange v-if="filter.type === 'range'" :filter="(filter as FilterRange)" />
   </template>
-  <button @click="store.resetAll()" class="link ml-2">Tout réinitialiser</button>
+  <button @click="store.resetAll()" class="link ml-2">Réinitialiser les filtres</button>
 </template>
 
 <style scoped>

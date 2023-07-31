@@ -15,5 +15,7 @@ export const useGlobalStore = defineStore('global', () => {
     copyright.value = data.value.global?.copyright || ''
   }
 
-  return { title, longTitle, shortDescription, longDescription, copyright, fetch }
+  fetch()
+
+  return { title, longTitle, shortDescription, longDescription, copyright }
 })

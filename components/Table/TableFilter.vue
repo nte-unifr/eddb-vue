@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const store = useFilterStore()
-store.fetch()
 </script>
 
 <template>

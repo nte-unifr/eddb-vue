@@ -75,5 +75,7 @@ export const useCollectionStore = defineStore('collection', () => {
     })
   }
 
-  return { items, total, fetch }
+  fetch()
+
+  return { items, total }
 })

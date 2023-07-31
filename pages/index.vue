@@ -7,7 +7,7 @@ const store = useGlobalStore()
     <div class="hero-content text-center">
       <div class="max-w-md">
         <h1 class="text-5xl font-bold">{{ store.longTitle }}</h1>
-        <p v-html="store.shortDescription" class="py-6"></p>
+        <div v-html="store.shortDescription" class="py-6"></div>
         <NuxtLink to="/collection" class="btn btn-primary">
           Parcourir la base de données
         </NuxtLink>

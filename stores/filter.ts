@@ -26,5 +26,7 @@ export const useFilterStore = defineStore('filter', () => {
     filterRangeStore.resetAll()
   }
 
-  return { filter, filters, fetch, resetAll }
+  fetch()
+
+  return { filter, filters, resetAll }
 })

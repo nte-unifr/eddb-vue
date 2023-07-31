@@ -1,5 +1,5 @@
 export const useGlobalStore = defineStore('global', () => {
-  const title = ref('')
+  const title = ref('App')
   const longTitle = ref('')
   const shortDescription = ref('')
   const longDescription = ref('')

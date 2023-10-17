@@ -1,32 +1,33 @@
 export const useFilterStore = defineStore('filter', () => {
 
-  const filterMultiselectStore = useFilterMultiselectStore()
-  const filterTextStore = useFilterTextStore()
-  const filterRangeStore = useFilterRangeStore()
+  const stores = [
+    useFilterMultiselectStore(),
+    useFilterTextStore(),
+    useFilterRangeStore()
+  ]
 
   const filter = computed(() => {
+    const filtersFromStores = stores.map(store => store.filter).flat()
     return {
-      _and: [...filterMultiselectStore.filter, ...filterTextStore.filter, ...filterRangeStore.filter]
+      _and: [...filtersFromStores]
     }
   })
 
   const filters = computed(() => {
-    return (filterMultiselectStore.filters as Filter[])
-      .concat(filterTextStore.filters as Filter[], filterRangeStore.filters as Filter[])
-      .sort((a, b) => (a.order || 0) - (b.order || 0));
+    const allFilters = stores.flatMap(store => store.filters as Filter[])
+    return allFilters.sort((a, b) => (a.order || 0) - (b.order || 0))
   })
 
-  async function fetch() {
-    await filterMultiselectStore.fetch()
+  async function initAll() {
+    const initPromises = stores.map(store => 'init' in store ? store.init() : null).filter(Boolean)
+    await Promise.all(initPromises)
   }
 
   function resetAll() {
-    filterMultiselectStore.resetAll()
-    filterTextStore.resetAll()
-    filterRangeStore.resetAll()
+    stores.forEach(store => store.resetAll())
   }
 
-  fetch()
+  initAll()
 
   return { filter, filters, resetAll }
 })

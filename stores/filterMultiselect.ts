@@ -17,7 +17,7 @@ export const useFilterMultiselectStore = defineStore('filterMultiselect', () => 
     })
   })
 
-  async function fetch() {
+  async function init() {
     const { data } = await useAsyncGql('GetMultiSelectOptions')
 
     filters.value.forEach(filter => {
@@ -59,6 +59,6 @@ export const useFilterMultiselectStore = defineStore('filterMultiselect', () => 
     })
   }
 
-  return { filter, filters, fetch, setActive, removeActive, reset, resetAll }
+  return { filter, filters, init, setActive, removeActive, reset, resetAll }
 
 })

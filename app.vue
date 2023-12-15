@@ -1,18 +1,17 @@
 <script setup lang="ts">
-const settings = useSettingsStore()
-const global = useGlobalStore()
+const config = useAppConfig()
+const theme = useState('app-theme', () => 'light')
+
 useHead({
-  title: global.longTitle,
-  meta: [
-    { name: global.longTitle, content: global.shortDescription }
-  ]
+  title: 'EDDB - ' + config.title,
+  meta: [{ name: 'description', content: 'Educational Database' }]
 })
 </script>
 
 <template>
-  <div id="app" :data-theme="settings.theme" class="bg-base-300">
+  <div id="app" :data-theme="theme" class="bg-base-300">
     <Navbar />
-    <div class="flex justify-center min-h-screen pt-24 px-8 mb-16">
+    <div class="flex justify-center min-h-screen pt-24 px-8 mb-16 print:pt-2">
       <NuxtPage />
     </div>
     <Footer />

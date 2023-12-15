@@ -1,36 +1,45 @@
 <script setup lang="ts">
-const store = useCollectionStore()
+const config = useAppConfig().collection
+
+const page = useState('collection-page', () => 1)
+const sort = useState('collection-sort', () => config.sorters[0].criteria)
+const rules = useState('collection-rules', () => '{"_and":[]}')
+
+// useFetchs utilize nuxt useFetch, as params are refs, the request is rerun when they change
+const { data: items, error, refresh } = useFetchCollection({ limit: config.limit, page: page, sort: sort, filter: rules })
+
+watch([sort, rules], () => {
+  page.value = 1
+})
 </script>
 
 <template>
   <div class="max-w-screen-2xl grow">
     <div class="flex my-4">
-      <TableSorter />
+      <CollectionSorter :sort="sort" @set-sort="(s) => sort = s" />
       <div class="grow"></div>
-      <TablePager />
+      <CollectionPager :page="page" @set-page="(p) => page = p" />
     </div>
-    <div class="flex flex-col flex-wrap lg:flex-row my-4">
-      <TableFilter />
+    <div class="my-4">
+      <CollectionFilter @set-rules="(r) => rules = r" />
     </div>
     <table class="table w-full bg-base-100">
       <thead class="sticky top-16 z-20 bg-base-200">
-        <tr>
-          <th class="text-base">Images</th>
-          <th class="text-base">Identification</th>
-          <th class="text-base hidden lg:table-cell">Datation</th>
-          <th class="text-base hidden lg:table-cell">Informations</th>
-        </tr>
+        <CollectionHead />
       </thead>
       <tbody>
-        <tr v-if="store.items?.length === 0">
-          <td class="font-semibold">Aucun résultat</td>
+        <tr v-if="items?.length === 0">
+          <td class="font-semibold">{{ config.noResults }}</td>
         </tr>
-        <TableRow v-for="item in store.items" :key="item.id" :item="item" />
+        <CollectionItem v-for="item in items" :key="item.id"
+          :id="item.id" :title="item.title" :subtitle="item.subtitle"
+          :images="item.images" :dates="item.dates" :informations="item.informations"
+        />
       </tbody>
     </table>
     <div class="flex my-4">
       <div class="grow"></div>
-      <TablePager v-if="store.total > 10" />
+      <CollectionPager :page="page" @set-page="(p) => page = p" />
     </div>
   </div>
 </template>

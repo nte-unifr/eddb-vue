@@ -16,7 +16,7 @@ const { data: item, error, refresh } = useFetchItem(identifier)
         <div class="my-8">
           <ItemImage v-for="image in item.images" :id="image.id" :title="image.title" :description="image.description" />
         </div>
-        <div class="lg:mx-16">
+        <div class="lg:mx-16 pagebreak">
           <div class="divider"></div>
           <div class="mt-4">
             <dl class="divide-y divide-gray-100">
@@ -38,14 +38,17 @@ const { data: item, error, refresh } = useFetchItem(identifier)
                 </template>
               </ItemInformation>
             </dl>
-            <div class="divider"></div>
-            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt class="text-sm font-medium leading-6">Téléchargements</dt>
-              <dd class="mt-2 text-sm sm:col-span-2 sm:mt-0">
-                <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
-                  <ItemDownload v-for="image in item.images" :id="image.id" :title="image.title" :url="image.id" type="image"  />
-                </ul>
-              </dd>
+            <div class="print:hidden">
+              <div class="divider"></div>
+              <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                <dt class="text-sm font-medium leading-6">Téléchargements</dt>
+                <dd class="mt-2 text-sm sm:col-span-2 sm:mt-0">
+                  <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
+                    <ItemDownload v-for="image in item.images" :id="image.id" :title="image.title" :url="image.id" type="image"  />
+                    <ItemDownload :id="item.id" :title="item.title" type="pdf" />
+                  </ul>
+                </dd>
+              </div>
             </div>
           </div>
         </div>
@@ -57,3 +60,9 @@ const { data: item, error, refresh } = useFetchItem(identifier)
     </div>
   </div>
 </template>
+
+<style>
+@media print {
+  .pagebreak { page-break-before: always; }
+}
+</style>

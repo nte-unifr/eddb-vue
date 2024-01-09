@@ -2,25 +2,14 @@ export function useFetchMultiDynFilter(criteria: string) {
   type DataItem = { [key: string]: unknown }
   const config = useAppConfig()
 
-  const backDefaultTransform = (data: { data: DataItem[]}) => {
-    const extractedValues = data.data
-      .map((item: DataItem) => item[criteria])
-      .filter((value): value is string => typeof value === 'string')
-
-    const uniqueValues = Array.from(new Set(extractedValues))
-    return uniqueValues.map((value: string, index: number) => ({
-      id: index,
-      title: value,
-      active: false
-    }))
-  }
-
   const defaultTransform = (data: { data: DataItem[] }) => {
     const extractedValues = data.data
       .map((item: DataItem) => item[criteria])
       .filter((value): value is string => typeof value === 'string')
+      .map(value => value.trim())
 
-    const uniqueSortedValues = Array.from(new Set(extractedValues)).sort()
+    const uniqueSortedValues = Array.from(new Set(extractedValues))
+      .sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }))
     return uniqueSortedValues
   }
 

@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
-    '@vueuse/nuxt'
   ],
   plugins: [
     '~/plugins/vue-photo-zoom-pro.js'

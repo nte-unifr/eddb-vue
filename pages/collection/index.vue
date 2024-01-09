@@ -18,7 +18,7 @@ watch([sort, rules], () => {
     <div class="flex my-4">
       <CollectionSorter :sort="sort" @set-sort="(s) => sort = s" />
       <div class="grow"></div>
-      <CollectionPager :page="page" @set-page="(p) => page = p" />
+      <CollectionPager v-model:page.number.trim="page" />
     </div>
     <div class="my-4">
       <CollectionFilter @set-rules="(r) => rules = r" />
@@ -39,7 +39,7 @@ watch([sort, rules], () => {
     </table>
     <div class="flex my-4">
       <div class="grow"></div>
-      <CollectionPager :page="page" @set-page="(p) => page = p" />
+      <CollectionPager v-model:page.number.trim="page" />
     </div>
   </div>
 </template>

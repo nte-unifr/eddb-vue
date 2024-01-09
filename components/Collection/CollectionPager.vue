@@ -1,23 +1,22 @@
 <script setup lang="ts">
-const emit = defineEmits(['set-page'])
-const props = defineProps<{
-  page: number
-}>()
+const page = defineModel<number>('page', { default: 1 })
 
 const rules = useState('collection-rules', () => '')
 const { data: totalCount } = useFetchCollectionCount()
 const { data: filterCount } = useFetchCollectionCount({ filter: rules })
 
 const maxPage = computed(() => Math.ceil(filterCount.value / useAppConfig().collection.limit))
-const firstPage = computed(() => props.page === 1)
-const lastPage = computed(() => props.page === maxPage.value)
+const firstPage = computed(() => page.value === 1)
+const lastPage = computed(() => page.value === maxPage.value)
 
-const setPage = (p: number) => {
-  if (p > 0 && p <= maxPage.value) {
-    emit('set-page', p)
-    scrollToTop()
+watchEffect(() => {
+  if(page.value < 1) {
+    page.value = 1
+  } else if (page.value > maxPage.value) {
+    page.value = maxPage.value
   }
-}
+  scrollToTop()
+})
 </script>
 
 <template>
@@ -25,18 +24,10 @@ const setPage = (p: number) => {
     <p class="mr-4 hidden lg:block">
       <strong>{{ filterCount }}</strong> résultats sur <strong>{{ totalCount }}</strong>
     </p>
-    <div v-if="maxPage > 1" class="join">
-      <button class="btn btn-sm join-item" @click="setPage(page - 1)" :disabled="firstPage">
-        <IconPrev />
-      </button>
-      <template v-for="p in maxPage">
-        <button class="btn btn-sm join-item" @click="setPage(p)" :class="{ 'btn-active': p === page }">
-          {{ p }}
-        </button>
-      </template>
-      <button class="btn btn-sm join-item" @click="setPage(page + 1)" :disabled="lastPage">
-        <IconNext />
-      </button>
-    </div>
+    <button class="btn btn-sm mx-2" @click="page--" :disabled="firstPage"><IconPrev /></button>
+    <div class="mx-2">Page</div>
+    <input v-model="page" @focus="($event.target as HTMLInputElement).select()" type="text" class="input input-bordered input-md input-primary text-center font-bold max-w-14 mx-2" />
+    <div class="font-bold mx-2">/ {{ maxPage }}</div>
+    <button class="btn btn-sm mx-2" @click="page++" :disabled="lastPage"><IconNext /></button>
   </div>
 </template>

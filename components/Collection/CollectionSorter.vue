@@ -1,23 +1,22 @@
 <script setup lang="ts">
-interface Sorter {
-  title: string;
-  type: string;
-  criteria: string[];
-}
+import type { SorterConfig } from "@/types/index"
+import { SORTER_TYPE_LETTERS, SORTER_TYPE_NUMBERS } from "@/types/constants"
 
-const emit = defineEmits(['set-sort'])
+const model = defineModel<string[]>()
 
-defineProps<{
-  sort: string[]
+const props = defineProps<{
+  sorter: SorterConfig
 }>()
-const sorters: Sorter[] = useAppConfig().collection.sorters
+
+function update() {
+  model.value = props.sorter.criteria
+}
 </script>
 
 <template>
-  <a v-for="sorter in sorters" class="link mr-4" @click="$emit('set-sort', sorter.criteria)"
-    :class="{ 'link-primary': sort === sorter.criteria }">
-    <IconAscendingLetters v-if="sorter.type == 'letters'" class="inline" />
-    <IconAscendingNumbers v-if="sorter.type == 'numbers'" class="inline" />
+  <a @click="update" :class="{ 'link-primary': model === sorter.criteria }" class="link mr-4">
+    <IconAscendingLetters v-if="sorter.type === SORTER_TYPE_LETTERS" class="inline" />
+    <IconAscendingNumbers v-if="sorter.type === SORTER_TYPE_NUMBERS" class="inline" />
     <span class="lg:inline">{{ sorter.title }}</span>
   </a>
 </template>

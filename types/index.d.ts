@@ -1,4 +1,4 @@
-import { INFORMATION_TYPES } from "@/types/constants"
+import { INFORMATION_TYPES, SORTER_TYPES } from "@/types/constants"
 
 declare module 'nuxt/schema' {
   interface AppConfigInput {
@@ -18,13 +18,9 @@ interface CollectionConfig {
   name: string
   limit: number
   noResults: string
-  item: CollectionItemConfig
-  sorters: any
+  item: ItemConfig
+  sorters: SorterConfig[]
   filters: any
-}
-
-export interface CollectionItemConfig extends ItemConfig {
-  dates: DateConfig[]
 }
 
 export interface ItemConfig {
@@ -52,6 +48,12 @@ export interface InformationConfig {
   criteria?: string[]
   emptyDisplay?: boolean
   suffix?: string
+}
+
+export interface SorterConfig {
+  title: string
+  type: typeof SORTER_TYPES[number]
+  criteria: string[]
 }
 
 // It is always important to ensure you import/export something when augmenting a type

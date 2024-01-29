@@ -19,7 +19,7 @@ watch([sort, rules], () => {
 <template>
   <div class="max-w-screen-2xl grow">
     <div class="flex my-4">
-      <CollectionSorter :sort="sort" @set-sort="(s) => sort = s" />
+      <CollectionSorter v-for="sorter in config.sorters" v-model="sort" :sorter="sorter" />
       <div class="grow"></div>
       <CollectionPager v-model:page.number="page" v-model:totalCount="totalCount" v-model:filterCount="filterCount" />
     </div>

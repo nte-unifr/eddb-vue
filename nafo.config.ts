@@ -1,4 +1,7 @@
-import { INFORMATION_TYPE_DATES, INFORMATION_TYPE_DIVIDER, INFORMATION_TYPE_HTML, INFORMATION_TYPE_TEXT } from "@/types/constants"
+import {
+  INFORMATION_TYPE_DATES, INFORMATION_TYPE_DIVIDER, INFORMATION_TYPE_HTML, INFORMATION_TYPE_TEXT,
+  SORTER_TYPE_LETTERS, SORTER_TYPE_NUMBERS
+} from "@/types/constants"
 
 export default defineAppConfig({
   title: "NAFO",
@@ -57,8 +60,8 @@ export default defineAppConfig({
       ]
     },
     sorters: [
-      { title: "Numéro d'inventaire", type: "letters", criteria: ["identifier"] },
-      { title: "Date", type: "numbers", criteria: ["date_from", "identifier"] }
+      { title: "Numéro d'inventaire", type: SORTER_TYPE_LETTERS, criteria: ["identifier"] },
+      { title: "Date", type: SORTER_TYPE_NUMBERS, criteria: ["date_from", "identifier"] }
     ],
     filters: [
       {

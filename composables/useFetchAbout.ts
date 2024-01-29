@@ -6,16 +6,14 @@ interface About {
 
 export function useFetchAbout() {
 
-  const defaultTransform = (data: any) => {
+  const defaultTransform = (data: any): About => {
     const apiAbout = data.data
 
-    const result: About = {
+    return {
       slogan: apiAbout.slogan || '',
       description: apiAbout.description || '',
       image: apiAbout.image || ''
     }
-
-    return result
   }
 
   const path = `/items/about`

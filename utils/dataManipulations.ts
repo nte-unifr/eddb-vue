@@ -1,4 +1,22 @@
-export const formatDate = (d: string|number) => {
-  let date = typeof d === 'number' ? d : parseInt(d)
-  return date > 0 ? Math.abs(date) + ' apr. J.-C.' : Math.abs(date) + ' av. J.-C.'
+function formatBCADDate(year: any) {
+  if (typeof year !== "number") {
+    return null
+  }
+  if (year < 0) {
+    return `${Math.abs(year)} av. J.-C.`
+  }
+  return `${year} apr. J.-C.`
 }
+
+export function formatDateRange(start: any, end: any): string {
+  const formattedStart = formatBCADDate(start)
+  const formattedEnd = formatBCADDate(end)
+
+  if (formattedStart && formattedEnd) {
+    return `${formattedStart} – ${formattedEnd}`
+  } else if (formattedStart || formattedEnd) {
+    return formattedStart || formattedEnd || 'Indéfinie'
+  }
+  return 'Indéfinie'
+}
+

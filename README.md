@@ -1,42 +1,27 @@
-# Nuxt 3 Minimal Starter
+# EDDB vue
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+EDDB stands for Educational Databases, and is a project for rapidly setting up databases for teaching and research.
 
 ## Setup
 
-Make sure to install the dependencies:
-
 ```bash
-# yarn
-yarn install
-
-# npm
+# install the dependencies
 npm install
 
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
-
-```bash
+# start the dev server on localhost:3000
 npm run dev
-```
 
-## Production
-
-Build the application for production:
-
-```bash
+# build the app for production
 npm run build
 ```
 
-Locally preview production build:
+## Documentation
 
-```bash
-npm run preview
-```
+[Vue.js](https://vuejs.org/)
+[Nuxt](https://nuxt.com)
+[Directus](https://directus.io/)
+[Tailwind CSS](https://tailwindcss.com)
+[Daisy UI](https://daisyui.com)
+[Tabler icons](https://tabler-icons.io/)
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+

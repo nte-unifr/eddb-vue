@@ -1,5 +1,5 @@
 type QueryOptions = {
-  filter?: Ref<string>;
+  filter?: Ref<string>
 }
 
 export function useFetchCollectionCount(query?: QueryOptions) {

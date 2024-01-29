@@ -17,7 +17,7 @@ const config = useAppConfig()
       <span class="footer-title">Responsable des données</span>
       <div>
         <div class="flex items-center">
-          <a :href="config.datamanager.url" class="link link-accent">{{ config.datamanager.name }}</a>
+          <a :href="config.mandant.url" class="link link-accent">{{ config.mandant.name }}</a>
         </div>
       </div>
     </div>

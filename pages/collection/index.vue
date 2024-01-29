@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Item } from "@/types/item"
 const config = useAppConfig().collection
 
 const page = useState('collection-page', () => 1)
@@ -6,7 +7,9 @@ const sort = useState('collection-sort', () => config.sorters[0].criteria)
 const rules = useState('collection-rules', () => '{"_and":[]}')
 
 // useFetchs utilize nuxt useFetch, as params are refs, the request is rerun when they change
-const { data: items, error, refresh } = useFetchCollection({ limit: config.limit, page: page, sort: sort, filter: rules })
+const { data: items } = await useFetchCollection({ limit: config.limit, page: page, sort: sort, filter: rules }) as { data: Ref<(Item|null)[]> }
+const { data: totalCount } = await useFetchCollectionCount()
+const { data: filterCount } = await useFetchCollectionCount({ filter: rules })
 
 watch([sort, rules], () => {
   page.value = 1
@@ -18,7 +21,7 @@ watch([sort, rules], () => {
     <div class="flex my-4">
       <CollectionSorter :sort="sort" @set-sort="(s) => sort = s" />
       <div class="grow"></div>
-      <CollectionPager v-model:page.number.trim="page" />
+      <CollectionPager v-model:page.number="page" v-model:totalCount="totalCount" v-model:filterCount="filterCount" />
     </div>
     <div class="my-4">
       <CollectionFilter @set-rules="(r) => rules = r" />
@@ -31,15 +34,14 @@ watch([sort, rules], () => {
         <tr v-if="items?.length === 0">
           <td class="font-semibold">{{ config.noResults }}</td>
         </tr>
-        <CollectionItem v-for="item in items" :key="item.id"
-          :id="item.id" :title="item.title" :subtitle="item.subtitle"
-          :images="item.images" :dates="item.dates" :informations="item.informations"
-        />
+        <template v-for="item in items">
+          <CollectionItem v-if="item" :item="item" />
+        </template>
       </tbody>
     </table>
     <div class="flex my-4">
       <div class="grow"></div>
-      <CollectionPager v-model:page.number.trim="page" />
+      <CollectionPager v-model:page.number="page" v-model:totalCount="totalCount" v-model:filterCount="filterCount" />
     </div>
   </div>
 </template>

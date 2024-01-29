@@ -1,9 +1,11 @@
 <script setup lang="ts">
 const page = defineModel<number>('page', { default: 1 })
+const totalCount = defineModel<number>('totalCount', { default: 0 })
+const filterCount = defineModel<number>('filterCount', { default: 0 })
 
 const rules = useState('collection-rules', () => '')
-const { data: totalCount } = useFetchCollectionCount()
-const { data: filterCount } = useFetchCollectionCount({ filter: rules })
+//const { data: totalCount } = useFetchCollectionCount()
+//const { data: filterCount } = useFetchCollectionCount({ filter: rules })
 
 const maxPage = computed(() => Math.ceil(filterCount.value / useAppConfig().collection.limit))
 const firstPage = computed(() => page.value === 1)

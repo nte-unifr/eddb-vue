@@ -1,7 +1,8 @@
-import { INFORMATION_TYPES, SORTER_TYPES } from "@/types/constants"
+import { INFORMATION_TYPES, SORTER_TYPES, FILTER_TYPES } from "@/types/constants"
 
 declare module 'nuxt/schema' {
   interface AppConfigInput {
+    apiUrl: string
     title: string
     description: string
     mandant: {
@@ -9,18 +10,26 @@ declare module 'nuxt/schema' {
       url: string
     }
     copyright: string
+    about: AboutConfig
     item: ItemConfig
     collection: CollectionConfig
   }
 }
 
-interface CollectionConfig {
+export interface AboutConfig {
+  title_criteria: string
+  slogan_criteria: string
+  description_criteria: string
+  image_criteria: string
+}
+
+export interface CollectionConfig {
   name: string
   limit: number
   noResults: string
   item: ItemConfig
   sorters: SorterConfig[]
-  filters: any
+  filters: FilterConfig[]
 }
 
 export interface ItemConfig {
@@ -54,6 +63,13 @@ export interface SorterConfig {
   title: string
   type: typeof SORTER_TYPES[number]
   criteria: string[]
+}
+
+export interface FilterConfig {
+  title: string
+  type: typeof FILTER_TYPES[number]
+  criteria: string[]
+  info?: string
 }
 
 // It is always important to ensure you import/export something when augmenting a type

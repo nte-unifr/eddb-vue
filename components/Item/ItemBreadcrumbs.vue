@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  id: number
+  id?: number
 }>()
 </script>
 
@@ -10,7 +10,9 @@ defineProps<{
       <li>
         <NuxtLink to="/collection">Collection</NuxtLink>
       </li>
-      <li>ID#{{ id }}</li>
+      <li v-if="id">
+        ID#{{ id }}
+      </li>
     </ul>
   </div>
 </template>

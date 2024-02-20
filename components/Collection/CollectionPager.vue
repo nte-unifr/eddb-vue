@@ -1,13 +1,10 @@
 <script setup lang="ts">
 const page = defineModel<number>('page', { default: 1 })
-const totalCount = defineModel<number>('totalCount', { default: 0 })
-const filterCount = defineModel<number>('filterCount', { default: 0 })
+const total = defineModel<number>('total', { default: 0 })
+const filtered = defineModel<number>('filtered', { default: 0 })
+const limit = useAppConfig().collection.limit
 
-const rules = useState('collection-rules', () => '')
-//const { data: totalCount } = useFetchCollectionCount()
-//const { data: filterCount } = useFetchCollectionCount({ filter: rules })
-
-const maxPage = computed(() => Math.ceil(filterCount.value / useAppConfig().collection.limit))
+const maxPage = computed(() => Math.ceil(filtered.value / limit))
 const firstPage = computed(() => page.value === 1)
 const lastPage = computed(() => page.value === maxPage.value)
 
@@ -23,12 +20,12 @@ watchEffect(() => {
 <template>
   <div class="flex items-center">
     <p class="mr-4 hidden lg:block">
-      <strong>{{ filterCount }}</strong> résultats sur <strong>{{ totalCount }}</strong>
+      <strong>{{ filtered }}</strong> résultats sur <strong>{{ total }}</strong> au total
     </p>
+    <button v-if="!firstPage" class="btn btn-sm ml-2" @click="page--;scrollToTop()"><IconPrev /></button>
     <div class="mx-2">Page</div>
     <input v-model="page" @focus="($event.target as HTMLInputElement).select()" type="text" class="input input-bordered input-md input-primary text-center font-bold max-w-14" />
     <div class="font-bold mx-2">/ {{ maxPage }}</div>
-    <button class="btn btn-sm ml-2" @click="page--;scrollToTop()" :disabled="firstPage"><IconPrev /></button>
-    <button class="btn btn-sm" @click="page++;scrollToTop()" :disabled="lastPage"><IconNext /></button>
+    <button v-if="!lastPage" class="btn btn-sm" @click="page++;scrollToTop()" :disabled="lastPage"><IconNext /></button>
   </div>
 </template>

@@ -6,14 +6,13 @@ export function useFetchMultiDynFilter(criteria: string) {
     const extractedValues = data.data
       .map((item: DataItem) => item[criteria])
       .filter((value): value is string => typeof value === 'string')
-      .map(value => value.trim())
 
     const uniqueSortedValues = Array.from(new Set(extractedValues))
       .sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }))
     return uniqueSortedValues
   }
 
-  const path = `/items/${config.collection.name}?limit=-1`
+  const path = `${config.apiUrl}/items/${config.collection.name}?limit=-1`
 
   return useFetchDefault(path, {
     query: {

@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  imports: {
+    dirs: ['utils/directus']
+  },
   modules: [
     '@nuxtjs/tailwindcss',
   ],
@@ -8,7 +11,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      baseURL: process.env.BASE_URL || 'https://eddb9.unifr.ch/nafo',
+      baseURL: process.env.API_URL || 'https://eddb9.unifr.ch/',
     }
   },
   experimental: {

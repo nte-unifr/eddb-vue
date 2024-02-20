@@ -19,7 +19,7 @@ function print() {
         <VFile v-for="image in images" type="image">
           <template v-slot:title>{{ image.title }}</template>
           <template v-slot:action>
-            <a :href="dThumbnail(image.id) + '?download'" class="font-medium text-primary">Télécharger</a>
+            <a :href="directusThumbnail(image.id) + '?download'" class="font-medium text-primary">Télécharger</a>
           </template>
         </VFile>
         <VFile type="pdf">

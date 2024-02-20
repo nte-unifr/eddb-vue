@@ -1,9 +1,11 @@
 import {
   INFORMATION_TYPE_DATES, INFORMATION_TYPE_DIVIDER, INFORMATION_TYPE_HTML, INFORMATION_TYPE_TEXT,
-  SORTER_TYPE_LETTERS, SORTER_TYPE_NUMBERS
+  SORTER_TYPE_LETTERS, SORTER_TYPE_NUMBERS,
+  FILTER_TYPE_TEXT, FILTER_TYPE_MULTIDYN, FILTER_TYPE_RANGE
 } from "@/types/constants"
 
 export default defineAppConfig({
+  apiUrl: "https://eddb9.unifr.ch/nafo",
   title: "NAFO",
   description: "",
   mandant: {
@@ -11,6 +13,12 @@ export default defineAppConfig({
     url: "https://www.unifr.ch/directory/fr/people/199032/23c3d"
   },
   copyright: "Université de Fribourg, Faculté des lettres et des sciences humaines, Département d’histoire / Musée d’art et d’histoire de Fribourg",
+  about: {
+    title_criteria: "title",
+    slogan_criteria: "slogan",
+    description_criteria: "description",
+    image_criteria: "image"
+  },
   item: {
     id_criteria: "id",
     title_criteria: "identifier",
@@ -64,62 +72,16 @@ export default defineAppConfig({
       { title: "Date", type: SORTER_TYPE_NUMBERS, criteria: ["date_from", "identifier"] }
     ],
     filters: [
-      {
-        "criteria": "identifier",
-        "type": "CollectionFilterText",
-        "title": "Numéro d'inventaire",
-        "placeholder": "ex: CPS 1015"
-      },
-      {
-        "criteria": "entity",
-        "type": "CollectionFilterMultiDyn",
-        "title": "Entité",
-      },
-      {
-        "criteria": "date",
-        "type": "CollectionFilterRange",
-        "title": "Datation",
-        "criteria_from": "date_from",
-        "criteria_to": "date_to",
-        "info": "Utilisez des valeurs négatives pour les dates av. J.-C."
-      },
-      {
-        "criteria": "authority",
-        "type": "CollectionFilterMultiDyn",
-        "title": "Autorité émettrice",
-      },
-      {
-        "criteria": "portrait",
-        "type": "CollectionFilterMultiDyn",
-        "title": "Portrait",
-      },
-      {
-        "criteria": "mint",
-        "type": "CollectionFilterMultiDyn",
-        "title": "Atelier",
-      },
-      {
-        "criteria": "material",
-        "type": "CollectionFilterMultiDyn",
-        "title": "Métal",
-      },
-      {
-        "criteria": "denomination",
-        "type": "CollectionFilterMultiDyn",
-        "title": "Dénomination",
-      },
-      {
-        "criteria": "bibliography",
-        "type": "CollectionFilterText",
-        "title": "Référence bibliographique",
-        "placeholder": "ex: Yarrow 2021"
-      },
-      {
-        "criteria": "comment",
-        "type": "CollectionFilterText",
-        "title": "Mots-clés",
-        "placeholder": "ex: sanctuaire"
-      }
+      { type: FILTER_TYPE_TEXT, title: "Numéro d'inventaire", criteria: ["identifier"], info: "ex: CPS 1015" },
+      { type: FILTER_TYPE_MULTIDYN, title: "Entité", criteria: ["entity"] },
+      { type: FILTER_TYPE_RANGE, title: "Datation", criteria: ["date_from", "date_to"], info: "Utilisez des valeurs négatives pour les dates av. J.-C." },
+      { type: FILTER_TYPE_MULTIDYN, title: "Autorité émettrice", criteria: ["authority"] },
+      { type: FILTER_TYPE_MULTIDYN, title: "Portrait", criteria: ["portrait"] },
+      { type: FILTER_TYPE_MULTIDYN, title: "Atelier", criteria: ["mint"] },
+      { type: FILTER_TYPE_MULTIDYN, title: "Métal", criteria: ["material"] },
+      { type: FILTER_TYPE_MULTIDYN, title: "Dénomination", criteria: ["denomination"] },
+      { type: FILTER_TYPE_TEXT, title: "Référence bibliographique", criteria: ["bibliography"], info: "ex: Yarrow 2021" },
+      { type: FILTER_TYPE_TEXT, title: "Mots-clés", criteria: ["comment"], info: "ex: sanctuaire" },
     ]
   }
 })

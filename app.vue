@@ -11,7 +11,8 @@ useHead({
 <template>
   <div id="app" :data-theme="theme" class="bg-base-300">
     <Navbar />
-    <div class="flex justify-center min-h-screen pt-24 px-8 mb-16 print:pt-2">
+    <div class="pt-24 mb-8 print:pt-2">
+      <NuxtLoadingIndicator />
       <NuxtPage />
     </div>
     <Footer />

@@ -9,17 +9,9 @@ const config = useAppConfig()
         <IconNTE />
       </div>
       <p>
-        Développement <a class="link link-accent" href="https://www.unifr.ch/nte/fr/">DIT-NTE</a>
-        <br/>Dans le cadre du service <a class="link link-accent" href="https://www.unifr.ch/it/fr/eddb.html">EDDB</a>
+        Développement <a class="link link-accent" href="https://www.unifr.ch/nte/fr/">DIT-NTE</a>, service <a class="link link-accent" href="https://www.unifr.ch/it/fr/eddb.html">EDDB</a>
+        <br />Responsable des données <a :href="config.mandant.url" class="link link-accent">{{ config.mandant.name }}</a>
       </p>
-    </div>
-    <div>
-      <span class="footer-title">Responsable des données</span>
-      <div>
-        <div class="flex items-center">
-          <a :href="config.mandant.url" class="link link-accent">{{ config.mandant.name }}</a>
-        </div>
-      </div>
     </div>
   </footer>
 </template>

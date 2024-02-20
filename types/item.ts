@@ -1,7 +1,7 @@
 import { INFORMATION_TYPES } from "@/types/constants"
 
 export interface Item {
-  id: string
+  id: number
   title: string
   subtitle?: string
   dates?: string

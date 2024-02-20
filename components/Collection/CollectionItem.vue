@@ -3,15 +3,15 @@ import type { Item } from "@/types/item"
 const configItem = useAppConfig().collection.item
 
 defineProps<{
-  item: Item
+  item: Item|null
 }>()
 </script>
 
 <template>
-  <tr>
+  <tr v-if="item">
     <td v-if="configItem.images.length" class="w-52">
       <div class="flex">
-        <img v-for="image in item.images" :src="dThumbnail(image.id, 'collection-thumb')" alt="" class="mask mask-squircle w-20 h-20"  />
+        <img v-for="image in item.images" :src="directusThumbnail(image.id, 'collection-thumb')" alt="" class="mask mask-squircle w-20 h-20"  />
       </div>
     </td>
     <td class="lg:w-52">

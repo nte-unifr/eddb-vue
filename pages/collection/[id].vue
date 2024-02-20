@@ -1,29 +1,22 @@
 <script setup lang="ts">
 import type { Item } from "@/types/item"
 
+const config = useAppConfig()
 const { id } = useRoute().params
-const identifier = parseInt(Array.isArray(id) ? id[0] : id)
-const { data: item } = useFetchItem(identifier) as { data: Ref<Item|null> }
+const path = `${config.apiUrl}/items/${config.collection.name}/${id}`
+
+const { data: item, error, pending } = useLazyFetch<Item>(path, {
+  transform: (response: any) => directusItem(config.item, response.data)
+})
 </script>
 
 <template>
-  <div class="container mx-auto max-w-5xl print:max-w-none">
-    <ItemBreadcrumbs :id="identifier" />
+  <VLoader v-if="pending" />
+  <VError v-else-if="error" :code="error.statusCode" :message="error.statusMessage" />
+  <div v-else-if="item" class="min-h-screen mx-auto max-w-5xl print:max-w-none">
+    <ItemBreadcrumbs :id="item?.id" />
     <div class="bg-base-100 shadow-xl rounded-xl p-10 print:p-2 print:shadow-none">
-      <div v-if="item">
-        <ItemHeader :title="item.title" :subtitle="item.subtitle || ''" />
-        <div class="lg:mx-12">
-          <ItemImages v-if="item.images?.length" :images="item.images" />
-          <div class="divider print:hidden"></div>
-          <ItemInformations v-if="item.informations?.length" :informations="item.informations" />
-          <div class="divider print:hidden"></div>
-          <ItemDownloads v-if="item.images?.length" :images="item.images" :pdf-title="item.title" />
-        </div>
-        <div class="my-4">
-          <div class="alert"><VCopyright /></div>
-        </div>
-      </div>
-      <VLoader v-else />
+      <Item :item="item" />
     </div>
   </div>
 </template>

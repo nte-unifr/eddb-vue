@@ -1,5 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  "app": {
+    "baseURL": "/nafo/",
+    "buildAssetsDir": "/_nuxt/",
+    "cdnURL": ""
+  },
   imports: {
     dirs: ['utils/directus']
   },

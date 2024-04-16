@@ -1,4 +1,8 @@
 export const formatDateRange = (start: any, end: any): string => {
+  if (start === end) {
+    return formatBCADDate(start) || 'Indéfinie'
+  }
+
   const formattedStart = formatBCADDate(start)
   const formattedEnd = formatBCADDate(end)
 

@@ -31,6 +31,7 @@ export default defineAppConfig({
       { type: INFORMATION_TYPE_DATES, title: "Datation", criteria: ["date_from", "date_to"] },
       { type: INFORMATION_TYPE_TEXT, title: "Entité", criteria: ["entity"] },
       { type: INFORMATION_TYPE_TEXT, title: "Autorité émettrice", criteria: ["authority"] },
+      { type: INFORMATION_TYPE_TEXT, title: "Portrait", criteria: ["portrait"] },
       { type: INFORMATION_TYPE_TEXT, title: "Atelier", criteria: ["mint"] },
       { type: INFORMATION_TYPE_TEXT, title: "Métal", criteria: ["material"] },
       { type: INFORMATION_TYPE_TEXT, title: "Dénomination", criteria: ["denomination"] },
@@ -80,7 +81,7 @@ export default defineAppConfig({
       { type: FILTER_TYPE_MULTIDYN, title: "Atelier", criteria: ["mint"] },
       { type: FILTER_TYPE_MULTIDYN, title: "Métal", criteria: ["material"] },
       { type: FILTER_TYPE_MULTIDYN, title: "Dénomination", criteria: ["denomination"] },
-      { type: FILTER_TYPE_TEXT, title: "Référence bibliographique", criteria: ["bibliography"], info: "ex: Yarrow 2021" },
+      { type: FILTER_TYPE_TEXT, title: "Référence bibliographique", criteria: ["reference"], info: "ex: Yarrow 2021" },
       { type: FILTER_TYPE_TEXT, title: "Mots-clés", criteria: ["comment"], info: "ex: sanctuaire" },
     ]
   }

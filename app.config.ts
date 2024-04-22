@@ -5,7 +5,7 @@ import {
 } from "@/types/constants"
 
 export default defineAppConfig({
-  apiUrl: "https://eddb9.unifr.ch/nafo",
+  apiUrl: "https://eddb.unifr.ch/nafo-admin",
   title: "NAFO",
   description: "",
   mandant: {

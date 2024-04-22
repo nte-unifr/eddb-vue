@@ -4,14 +4,23 @@ const total = defineModel<number>('total', { default: 0 })
 const filtered = defineModel<number>('filtered', { default: 0 })
 const limit = useAppConfig().collection.limit
 
-const maxPage = computed(() => Math.ceil(filtered.value / limit))
+const maxPage = computed(() => {
+  const calculatedPages = Math.ceil(filtered.value / limit)
+  return calculatedPages < 1 ? 1 : calculatedPages
+})
 const firstPage = computed(() => page.value === 1)
 const lastPage = computed(() => page.value === maxPage.value)
 
-watchEffect(() => {
-  if (typeof page.value != "number" || page.value < 1) {
+watch(() => page.value, (newPage) => {
+  if (newPage < 1) {
     page.value = 1
-  } else if (page.value > maxPage.value) {
+  } else if (newPage > maxPage.value) {
+    page.value = maxPage.value
+  }
+})
+
+watch(() => filtered.value, (newFiltered) => {
+  if (page.value > maxPage.value) {
     page.value = maxPage.value
   }
 })

@@ -81,7 +81,7 @@ export default defineAppConfig({
       { type: FILTER_TYPE_MULTIDYN, title: "Atelier", criteria: ["mint"] },
       { type: FILTER_TYPE_MULTIDYN, title: "Métal", criteria: ["material"] },
       { type: FILTER_TYPE_MULTIDYN, title: "Dénomination", criteria: ["denomination"] },
-      { type: FILTER_TYPE_TEXT, title: "Référence bibliographique", criteria: ["reference"], info: "ex: Yarrow 2021" },
+      { type: FILTER_TYPE_TEXT, title: "Référence bibliographique", criteria: ["reference"], info: "ex: Alexandria 47" },
       { type: FILTER_TYPE_TEXT, title: "Mots-clés", criteria: ["comment"], info: "ex: sanctuaire" },
     ]
   }

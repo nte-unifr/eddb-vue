@@ -1,13 +1,13 @@
 export const formatDateRange = (start: any, end: any): string => {
-  if (start === end) {
-    return formatBCADDate(start) || 'Indéfinie'
-  }
-
-  const formattedStart = formatBCADDate(start)
-  const formattedEnd = formatBCADDate(end)
+  const formattedStart = formatBCADDate(String(start))
+  const formattedEnd = formatBCADDate(String(end))
 
   if (formattedStart && formattedEnd) {
-    return `${formattedStart} – ${formattedEnd}`
+    if (formattedStart === formattedEnd) {
+      return formattedStart || 'Indéfinie'
+    } else {
+      return `${formattedStart} – ${formattedEnd}`
+    }
   } else if (formattedStart || formattedEnd) {
     return formattedStart || formattedEnd || 'Indéfinie'
   }
@@ -15,11 +15,12 @@ export const formatDateRange = (start: any, end: any): string => {
 }
 
 function formatBCADDate(year: any) {
-  if (typeof year !== "number") {
-    return null
+  const typedYear = parseInt(year)
+  if (isNaN(typedYear)) {
+    return ''
+  } else if (typedYear < 0) {
+    return `${Math.abs(typedYear)} av. J.-C.`
+  } else {
+    return `${typedYear} apr. J.-C.`
   }
-  if (year < 0) {
-    return `${Math.abs(year)} av. J.-C.`
-  }
-  return `${year} apr. J.-C.`
 }

@@ -1,20 +1,30 @@
 <script setup lang="ts">
-const config = useAppConfig()
-const theme = useState('app-theme')
+const { name } = useAppConfig()
+const { baseURL } = useRuntimeConfig().public
+const theme = useTheme()
+
+const { data: project } = await useAsyncData('project', () => queryContent(name).where({ '_id': { $contains: 'about.md' } }).only(['_id', 'title']).findOne())
 </script>
 
 <template>
-  <div class="navbar bg-base-100 fixed z-50 drop-shadow-md print:hidden">
-    <div class="navbar-start">
-      <img v-if="theme == 'light'" class="w-12 hidden lg:block" src="~/assets/img/unifr-black-96.png" alt="Unifr logo" />
-      <img v-if="theme == 'dark'" class="w-12 hidden lg:block" src="~/assets/img/unifr-white-96.png" alt="Unifr logo" />
+  <div class="navbar bg-base-100 fixed z-50 drop-shadow-md">
+    <div v-if="project" class="navbar-start">
+      <img class="w-12 hidden lg:block" :src="`${ baseURL }/img/unifr-${ theme }-96.png`" alt="Unifr logo" />
       <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">
-        {{ config.title }}
+        {{ project.title }}
       </NuxtLink>
-      <ul class="menu menu-horizontal px-1 hidden lg:inline-flex">
-        <li><NuxtLink to="/collection"><IconCollection /> Collection</NuxtLink></li>
-        <li><NuxtLink to="/"><IconInfo /> A propos</NuxtLink></li>
-      </ul>
+      <ContentNavigation v-slot="{ navigation }" :query="queryContent(name)">
+        <ul class="menu menu-horizontal px-1 hidden lg:inline-flex">
+          <li><NuxtLink to="/collection"><IconCollection /> Collection</NuxtLink></li>
+          <li v-for="link of navigation[0].children" :key="link._id">
+            <NuxtLink :to="`/page/${ link.path }`">
+              <IconInfo v-if="link._path?.includes('/about')" />
+              <IconClipboardText v-else />
+              {{ link.title }}
+            </NuxtLink>
+          </li>
+        </ul>
+      </ContentNavigation>
     </div>
     <div class="navbar-end">
       <button v-if="theme === 'light'" @click="theme = 'dark'" class="btn btn-circle btn-ghost">

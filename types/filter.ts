@@ -1,22 +1,12 @@
-import type { FilterConfig } from "@/types/index"
+export const FILTER_TYPE_TEXT = 'FiltersText'
+export const FILTER_TYPE_SELECT = 'FiltersSelect'
+export const FILTER_TYPE_RANGE = 'FiltersRange'
+export const FILTER_TYPES = [FILTER_TYPE_TEXT, FILTER_TYPE_SELECT, FILTER_TYPE_RANGE] as const
 
-export interface FilterBase {
-  config: FilterConfig
+export interface Filter {
+  type: typeof FILTER_TYPES[number]
+  title: string
+  apiCriteria: string | string[]
+  info?: string
+  options?: string[]
 }
-
-export interface FilterText extends FilterBase {
-  model: string
-}
-
-export interface FilterMultiDyn extends FilterBase {
-  model: string[]
-}
-
-export interface FilterRange extends FilterBase {
-  model: {
-    from: string
-    to: string
-  }
-}
-
-export type Filter = FilterText | FilterMultiDyn | FilterRange

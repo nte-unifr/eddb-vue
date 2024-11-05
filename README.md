@@ -24,4 +24,7 @@ npm run build
 [Daisy UI](https://daisyui.com)
 [Tabler icons](https://tabler-icons.io/)
 
-
+## Configure project
+- imports /config from
+  - app.config.ts
+  - nuxt.config.ts

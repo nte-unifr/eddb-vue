@@ -9,13 +9,14 @@ defineProps<{
 
 <template>
   <div class="hero min-h-screen">
-    <div class="hero-content max-w-5xl flex-col lg:flex-row-reverse">
-      <img src="~/assets/img/error.png" class="max-w-sm rounded-lg shadow-2xl ml-4" />
+    <div class="hero-content flex-col lg:flex-row">
+      <img src="~/assets/img/error.png" class="max-w-sm rounded-lg shadow-2xl mr-4" />
       <div>
-        <h1 class="text-5xl font-bold">{{ config.title }}</h1>
-        <h2 class="text-2xl font-bold opacity-70">Database error <span v-if="code">: {{ code }}</span></h2>
-        <p v-if="message" class="py-3">{{ message }}</p>
-        <p class="py-3">Please contact <em>nte@unifr.ch</em></p>
+        <h1 class="text-5xl font-bold">Database error</h1>
+        <div class="py-4">
+          <p>{{ code }} {{ message }}</p>
+          <p>Please contact <em>nte@unifr.ch</em></p>
+        </div>
       </div>
     </div>
   </div>

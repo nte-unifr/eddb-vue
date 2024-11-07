@@ -5,7 +5,6 @@ import { itemConfig } from './itemConfig'
 
 export default {
   name: "callisto",
-  baseURL: "/callisto/",
   sorters,
   filters,
   api: {

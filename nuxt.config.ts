@@ -1,9 +1,10 @@
 import config from "./config/nafo/app";
+const baseURL = "/nafo/";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
-    baseURL: config.baseURL,
+    baseURL: baseURL,
     buildAssetsDir: "/_nuxt/",
     cdnURL: "",
   },
@@ -18,7 +19,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      baseURL: config.baseURL,
+      baseURL: baseURL,
       name: config.name,
       itemConfig: config.itemConfig,
       api: config.api,

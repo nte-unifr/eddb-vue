@@ -7,7 +7,6 @@ export type Display = typeof DISPLAYS[number]
 
 export interface AppConfig {
   name: string
-  baseURL: string
   copyright?: string
   api: {
     provider: string

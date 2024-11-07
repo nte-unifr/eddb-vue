@@ -35,7 +35,7 @@ const files = computed<File[]>(() => {
     <VBreadcrumbs :title="`ID#${item.id}`" :parent="{ title: 'Collection', path: '/collection'}" />
     <div class="bg-base-100 shadow-xl rounded-xl p-10 print:p-2 print:shadow-none m-2 mb-24">
       <div role="alert" class="alert mb-6 hidden print:grid">
-        <ContentDoc :path="`/${ name }/_print`" />
+        <ContentDoc :path="`/${ name }/_print`" :head="false" />
       </div>
       <div class="py-4 print:pt-0 border-b-2 border-gray-200">
         <h2 class="text-4xl font-bold leading-tight">

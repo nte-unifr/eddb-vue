@@ -12,7 +12,7 @@ const { data: item, error, pending } = await useFetch<Item>(`api/${provider}/${i
 
 const files = computed<File[]>(() => {
   const filesList: File[] = [
-    { type: FILE_TYPE_PDF, title: item.value?.title || '' }
+  { type: FILE_TYPE_PDF, title: item.value?.title || '' }
   ]
   
   if (item.value?.images) {
@@ -23,7 +23,7 @@ const files = computed<File[]>(() => {
     }))
     filesList.push(...imageFiles)
   }
-
+  
   return filesList
 })
 </script>
@@ -34,6 +34,9 @@ const files = computed<File[]>(() => {
   <div v-else-if="item" class="min-h-screen mx-auto max-w-5xl print:max-w-none">
     <VBreadcrumbs :title="`ID#${item.id}`" :parent="{ title: 'Collection', path: '/collection'}" />
     <div class="bg-base-100 shadow-xl rounded-xl p-10 print:p-2 print:shadow-none m-2 mb-24">
+      <div role="alert" class="alert mb-6 hidden print:grid">
+        <ContentDoc :path="`/${ name }/_print`" />
+      </div>
       <div class="py-4 print:pt-0 border-b-2 border-gray-200">
         <h2 class="text-4xl font-bold leading-tight">
           {{ item.title }}

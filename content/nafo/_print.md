@@ -1,0 +1,1 @@
+Cette page a été extraite de : C. Brélaz, J. Python (éd.), *Numismatique antique fribourgeoise online (NAFO)*, Université de Fribourg, Faculté des lettres et des sciences humaines, Département d’histoire / Musée d’art et d’histoire de Fribourg, 2024– : [https://eddb.unifr.ch/nafo/](https://eddb.unifr.ch/nafo/)

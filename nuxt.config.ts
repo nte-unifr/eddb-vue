@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     dirs: ["utils/directus"],
   },
 
-  modules: ["@nuxtjs/tailwindcss", "@nuxt/content", "@nuxt/image"],
+  modules: ["@nuxtjs/tailwindcss", "@nuxt/content", "@nuxt/image", "@nuxt/icon"],
 
   plugins: ["~/plugins/vue-photo-zoom-pro.js"],
 

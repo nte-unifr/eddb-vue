@@ -9,15 +9,16 @@ const { data: projects } = await useAsyncData('projects', () => queryContent('/'
   <footer class="footer bg-neutral text-neutral-content p-10">
     <aside>
       <div class="flex">
-        <IconBrandOpenSource />
-        <IconLetterN />
-        <IconLetterT />
-        <IconLetterE />
+        <Icon name="tabler:circle-letter-d" size="36px" />
+        <Icon name="tabler:circle-letter-i" size="36px" />
+        <Icon name="tabler:circle-letter-t" size="36px" />
+        <Icon name="tabler:circle-letter-e-filled" size="36px" />
+        <Icon name="tabler:circle-letter-r-filled" size="36px" />
       </div>
       <p class="font-bold">
-        Développement <a class="link" href="https://www.unifr.ch/nte/fr/">DIT-NTE</a>
+        Développement<br /> <a class="link" href="https://www.unifr.ch/nte/fr/">DIT Enseignement et Recherche</a>
         <br />
-        Service <a class="link" href="https://www.unifr.ch/it/fr/eddb.html">EDDB</a>
+        dans le cadre du Service <a class="link" href="https://www.unifr.ch/it/fr/eddb.html">EDDB</a>
       </p>
     </aside>
     <nav>

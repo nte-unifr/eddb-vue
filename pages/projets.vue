@@ -23,7 +23,7 @@ const { baseURL } = useRuntimeConfig().public
           <div v-for="project in list" :key="project._path">
             <div class="flex flex-col lg:flex-row-reverse my-24 px-4">
               <div class="flex justify-center items-center mb-4 lg:w-1/3 lg:ml-8 ">
-                <img v-if="project.image" :src="`${ baseURL }/img/${ project.image }`" class="rounded-lg shadow-2xl size-64" />
+                <img v-if="project.image" :src="`/img/${ project.image }`" class="rounded-lg shadow-2xl size-64" />
                 <img v-else :src="`img/eddb-art.png`" class="rounded-lg shadow-2xl size-64" />
               </div>
               <div class="lg:w-2/3">

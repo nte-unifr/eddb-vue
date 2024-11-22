@@ -8,8 +8,8 @@ const { data: project } = await useAsyncData('project', () => queryContent(name)
 
 <template>
   <div class="navbar bg-base-100 fixed z-50 drop-shadow-md">
-    <div v-if="project" class="navbar-start">
-      <img class="w-12 hidden lg:block" :src="`${ baseURL }/img/unifr-${ theme }-96.png`" alt="Unifr logo" />
+    <div v-if="name != 'eddb' && project" class="navbar-start">
+      <img class="w-12 hidden lg:block" :src="`/img/unifr-${ theme }-96.png`" alt="Unifr logo" />
       <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">
         {{ project.title }}
       </NuxtLink>
@@ -25,6 +25,14 @@ const { data: project } = await useAsyncData('project', () => queryContent(name)
           </li>
         </ul>
       </ContentNavigation>
+    </div>
+    <div v-else class="navbar-start">
+      <img class="w-12 hidden lg:block" :src="`/img/unifr-${ theme }-96.png`" alt="Unifr logo" />
+      <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">EDDB</NuxtLink>
+      <ul class="menu menu-horizontal px-1 hidden lg:inline-flex">
+        <li><NuxtLink to="/"><IconInfo /> A propos</NuxtLink></li>
+        <li><NuxtLink to="/projets"><IconCollection /> Projets</NuxtLink></li>
+      </ul>
     </div>
     <div class="navbar-end">
       <button v-if="theme === 'light'" @click="theme = 'dark'" class="btn btn-circle btn-ghost">

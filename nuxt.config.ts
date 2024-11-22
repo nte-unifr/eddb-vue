@@ -1,5 +1,8 @@
-import config from "./config/nafo/app";
-const baseURL = "/nafo/";
+import config from "./config/eddb/app"
+const baseURL = "/"
+
+// import config from "./config/nafo/app"
+// const baseURL = "/nafo/"
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -35,4 +38,4 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
-});
+})
